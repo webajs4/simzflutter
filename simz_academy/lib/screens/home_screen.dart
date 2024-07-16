@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 //main container
                 Container(
                   width: 400,
-                  height: 200,
+                  height: 250,
                   decoration: BoxDecoration(
                     color: Color.fromRGBO(196, 220, 243, 1),
                     borderRadius: BorderRadius.circular(16),
@@ -158,10 +158,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                               ),
                               customText('Musical Masterpiece composed by \nTraditional', 16, FontWeight.w400, Color.fromRGBO(18, 39, 63, 1),),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  customText('48%  ', 20, FontWeight.w600, Color.fromRGBO(18, 39, 63, 1)),
+                                  customText('Completed', 15, FontWeight.w300, Color.fromRGBO(18, 39, 63, 1)),
+                                  Expanded(child: SizedBox()),
+                                  ElevatedButton(
+                                    
+                                    onPressed: () {
+                                      // navigate to a required page --> lesson tracking
+                                    },
+                                    child: Text('Track Lessons',
+                                      // style: TextStyle(
+                                      //   fontsize: 15,
+                                      //   fontweight: FontWeight.w300,
+                                      //   color: Color.fromRGBO(18, 39, 63, 1),
+                                      // ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
-                      ]),
+                      ],
+                  ),
                 ),
               ],
             ),
