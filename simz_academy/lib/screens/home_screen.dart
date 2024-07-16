@@ -154,10 +154,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Iconsax.music_playlist,
                                       color: Color.fromRGBO(28, 83, 136, 1),
                                     ),
-                                  )
-                                  // customText(content, fontSize, fontWeight, color)  <--- TEXT
+                                  ),
                                 ],
                               ),
+                              customText('Musical Masterpiece composed by \nTraditional', 16, FontWeight.w400, Color.fromRGBO(18, 39, 63, 1),),
                             ],
                           ),
                         ),
