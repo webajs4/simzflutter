@@ -3,6 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:simz_academy/screens/exam_screen.dart';
+import 'package:simz_academy/screens/practise_screen.dart';
+import 'package:simz_academy/screens/sheet_screen.dart';
+import 'package:simz_academy/screens/syllabus_screen.dart';
+import 'package:simz_academy/widgets/home_screen_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,13 +24,13 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            customText(
+            HomeUiHelper().customText(
               'Howdy',
               16,
               FontWeight.w300,
               Color.fromRGBO(56, 15, 67, 1.0),
             ),
-            customText(
+            HomeUiHelper().customText(
               'Alan Jose Santo',
               24,
               FontWeight.w600,
@@ -114,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(
                               width: 10,
                             ),
-                            customText(
+                            HomeUiHelper().customText(
                               'Learning Now',
                               15,
                               FontWeight.normal,
@@ -130,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          customText(
+                          HomeUiHelper().customText(
                             'Grade 2',
                             15,
                             FontWeight.normal,
@@ -140,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              customText(
+                              HomeUiHelper().customText(
                                 'Sky Boat Song',
                                 24,
                                 FontWeight.bold,
@@ -155,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                          customText(
+                          HomeUiHelper().customText(
                             'Musical Masterpiece composed by \nTraditional',
                             16,
                             FontWeight.w400,
@@ -164,9 +169,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              customText('48%  ', 20, FontWeight.w600,
+                              HomeUiHelper().customText(
+                                  '48%  ',
+                                  20,
+                                  FontWeight.w600,
                                   Color.fromRGBO(18, 39, 63, 1)),
-                              customText('Completed', 15, FontWeight.w300,
+                              HomeUiHelper().customText(
+                                  'Completed',
+                                  15,
+                                  FontWeight.w300,
                                   Color.fromRGBO(18, 39, 63, 1)),
                               Expanded(child: SizedBox()),
                               ElevatedButton(
@@ -200,12 +211,27 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 10,),
-              customText(
+              const SizedBox(
+                height: 10,
+              ),
+              HomeUiHelper().customText(
                 'Something to do',
                 28,
                 FontWeight.w600,
                 Color.fromRGBO(56, 15, 67, 1),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  SomethingToDo().buildIconButtonWithText(
+                      context, Iconsax.bookmark, 'Syllabus', SyllabusScreen(),Color.fromRGBO(91, 40, 103, 1),Color.fromRGBO(236, 215, 247, 1)),
+                  SomethingToDo().buildIconButtonWithText(
+                      context, Iconsax.clipboard_text, 'Exam', ExamScreen(),Color.fromRGBO(126, 30, 37, 1),Color.fromRGBO(254, 202, 206, 1)),
+                  SomethingToDo().buildIconButtonWithText(
+                      context, Iconsax.music_square, 'Sheets', SheetScreen(),Color.fromRGBO(27, 60, 95, 1),Color.fromRGBO(196, 220, 243, 1)),
+                  SomethingToDo().buildIconButtonWithText(
+                      context, Iconsax.microphone_2, 'Practise', PractiseScreen(),Color.fromRGBO(91, 40, 103, 1),Color.fromRGBO(236, 215, 247, 1)),
+                ],
               ),
             ],
           ),
