@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/screens/exam_screen.dart';
@@ -10,6 +11,7 @@ import 'package:simz_academy/screens/syllabus_screen.dart';
 import 'package:simz_academy/widgets/home_screen_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
+
   const HomeScreen({super.key});
 
   @override
@@ -17,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -267,7 +270,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 HomeUiHelper().customText('Appreciations', 28, FontWeight.w600,
                     Color.fromRGBO(56, 15, 67, 1)),
                 Appreciations(),
-                const SizedBox(height: 50,),
+                const SizedBox(
+                  height: 50,
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
@@ -290,8 +295,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const Color.fromRGBO(27, 60, 95, 1)),
                           ],
                         ),
-                        HomeUiHelper().customText('v1.0.2024', 16, FontWeight.w300, Color.fromRGBO(105, 42, 123, 1)),
-                        HomeUiHelper().customText('Developed By Team AJS Web Creatives', 16, FontWeight.w300, Color.fromRGBO(105, 42, 123, 1)),        
+                        HomeUiHelper().customText('v1.0.2024', 16,
+                            FontWeight.w300, Color.fromRGBO(105, 42, 123, 1)),
+                        HomeUiHelper().customText(
+                            'Developed By Team AJS Web Creatives',
+                            16,
+                            FontWeight.w300,
+                            Color.fromRGBO(105, 42, 123, 1)),
                       ],
                     ),
                   ),
@@ -300,6 +310,55 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(left: 8, right: 8, bottom: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 8,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: CurvedNavigationBar(
+            animationDuration: Duration(milliseconds: 450),
+            index: _selectedIndex,
+            color: Color.fromRGBO(246, 235, 252, 1),
+            backgroundColor: Color.fromRGBO(246, 235, 252, 0.75),
+            onTap: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+            items: [
+              bottomNavIcon(Iconsax.home_2, 0),
+              bottomNavIcon(Iconsax.music_library_2, 1),
+              bottomNavIcon(Iconsax.book, 2),
+              bottomNavIcon(Iconsax.empty_wallet, 3),
+              bottomNavIcon(Iconsax.user, 4),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget bottomNavIcon(IconData iconData, int index) {
+    bool isSelected = _selectedIndex == index;
+    return Container(
+      padding: EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: isSelected ? Color.fromRGBO(91, 40, 103, 1) : Colors.transparent,
+        shape: BoxShape.circle,
+      ),
+      child: Icon(
+        iconData,
+        color: isSelected ? Colors.white : Color.fromRGBO(91, 40, 103, 1),
       ),
     );
   }
