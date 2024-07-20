@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:simz_academy/screens/home_screen.dart';
+import 'package:simz_academy/screens/bottom_nav.dart';
+
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -7,11 +8,11 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(
-      Duration(seconds: 3),
+      const Duration(seconds: 3),
       () {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => const BottomNav()),
         );
       },
     );
