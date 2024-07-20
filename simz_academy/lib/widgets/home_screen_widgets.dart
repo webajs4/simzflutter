@@ -90,87 +90,89 @@ class _LiveNowState extends State<LiveNow> {
         final livementor = firstLiveEvent?['mentor'] ?? 'No Mentor';
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            height: 200,
-            width: 400,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: const Color.fromRGBO(223, 183, 240, 1),
+          child: Center(
+            child: Container(
+              height: 200,
+              width: 400,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: const Color.fromRGBO(223, 183, 240, 1),
+                ),
+                borderRadius: BorderRadius.circular(13),
               ),
-              borderRadius: BorderRadius.circular(13),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    HomeUiHelper().customText('  Live Now', 15, FontWeight.w600,
-                        const Color.fromRGBO(207, 35, 47, 1)),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    HomeUiHelper().customText("  $liveName", 28,
-                        FontWeight.w600, const Color.fromRGBO(56, 15, 67, 1)),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    HomeUiHelper().customText("  $livementor", 18,
-                        FontWeight.w400, const Color.fromRGBO(56, 15, 67, 1)),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: 155,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            shape: WidgetStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      HomeUiHelper().customText('  Live Now', 15, FontWeight.w600,
+                          const Color.fromRGBO(207, 35, 47, 1)),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      HomeUiHelper().customText("  $liveName", 28,
+                          FontWeight.w600, const Color.fromRGBO(56, 15, 67, 1)),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      HomeUiHelper().customText("  $livementor", 18,
+                          FontWeight.w400, const Color.fromRGBO(56, 15, 67, 1)),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          width: 155,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              shape: WidgetStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              backgroundColor: WidgetStateProperty.all(
+                                const Color.fromRGBO(105, 42, 123, 1),
                               ),
                             ),
-                            backgroundColor: WidgetStateProperty.all(
-                              const Color.fromRGBO(105, 42, 123, 1),
+                            onPressed: () {},
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                HomeUiHelper().customText(
+                                  'Attend Live  ',
+                                  16,
+                                  FontWeight.w300,
+                                  const Color.fromRGBO(242, 247, 253, 1),
+                                ),
+                                const Icon(
+                                  Iconsax.voice_square,
+                                  color: Color.fromRGBO(251, 246, 253, 1),
+                                )
+                              ],
                             ),
-                          ),
-                          onPressed: () {},
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              HomeUiHelper().customText(
-                                'Attend Live  ',
-                                16,
-                                FontWeight.w300,
-                                const Color.fromRGBO(242, 247, 253, 1),
-                              ),
-                              const Icon(
-                                Iconsax.voice_square,
-                                color: Color.fromRGBO(251, 246, 253, 1),
-                              )
-                            ],
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 140,
-                  width: 140,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
+                    ],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.network(
-                      'https://images.pexels.com/photos/191240/pexels-photo-191240.jpeg?cs=srgb&dl=pexels-ferarcosn-191240.jpg&fm=jpg',
-                      fit: BoxFit.fill,
+                  Container(
+                    height: 140,
+                    width: 140,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.network(
+                        'https://images.pexels.com/photos/191240/pexels-photo-191240.jpeg?cs=srgb&dl=pexels-ferarcosn-191240.jpg&fm=jpg',
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );
