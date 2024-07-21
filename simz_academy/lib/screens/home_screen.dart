@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
-
 import 'package:simz_academy/screens/exam_screen.dart';
-
-
 import 'package:simz_academy/screens/practise_screen.dart';
 
 import 'package:simz_academy/screens/sheet_screen.dart';
