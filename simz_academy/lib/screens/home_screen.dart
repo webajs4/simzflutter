@@ -18,7 +18,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,6 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ]),
+                const SizedBox(
+                  height: 10,
+                ),
                 //main container
                 Center(
                   child: Container(
@@ -234,6 +236,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   FontWeight.w600,
                   const Color.fromRGBO(56, 15, 67, 1),
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
@@ -268,17 +273,32 @@ class _HomeScreenState extends State<HomeScreen> {
                         const Color.fromRGBO(236, 215, 247, 1)),
                   ],
                 ),
+                const SizedBox(
+                  height: 7,
+                ),
                 HomeUiHelper().customText('Live Class', 28, FontWeight.w600,
                     const Color.fromRGBO(56, 15, 67, 1)),
+                const SizedBox(
+                  height: 10,
+                ),
                 const LiveNow(),
                 const SizedBox(
                   height: 5,
                 ),
                 HomeUiHelper().customText('Upcoming', 28, FontWeight.w600,
                     const Color.fromRGBO(56, 15, 67, 1)),
+                const SizedBox(
+                  height: 10,
+                ),
                 const Upcoming(),
+                const SizedBox(
+                  height: 10,
+                ),
                 HomeUiHelper().customText('Appreciations', 28, FontWeight.w600,
                     const Color.fromRGBO(56, 15, 67, 1)),
+                const SizedBox(
+                  height: 10,
+                ),
                 const Appreciations(),
                 const SizedBox(
                   height: 50,
@@ -327,23 +347,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget bottomNavIcon(
-    IconData iconData,
-    int index,
-  ) {
-    bool isSelected = _selectedIndex == index;
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: isSelected
-            ? const Color.fromRGBO(91, 40, 103, 1)
-            : Colors.transparent,
-        shape: BoxShape.circle,
-      ),
-      child: Icon(
-        iconData,
-        color: isSelected ? Colors.white : const Color.fromRGBO(91, 40, 103, 1),
-      ),
-    );
+  
   }
-}
