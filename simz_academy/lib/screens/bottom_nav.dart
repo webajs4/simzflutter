@@ -7,6 +7,7 @@ import 'package:simz_academy/screens/home_screen.dart';
 import 'package:simz_academy/screens/music_library.dart';
 import 'package:simz_academy/screens/profile_screen.dart';
 
+/// A stateful widget that displays a bottom navigation bar with five tabs.
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
 
@@ -14,6 +15,7 @@ class BottomNav extends StatefulWidget {
   State<BottomNav> createState() => _BottomNavState();
 }
 
+/// The state of the [BottomNav] widget.
 class _BottomNavState extends State<BottomNav> {
   int _selectedIndex = 0;
   final PageController _pageController = PageController(initialPage: 0);
@@ -74,6 +76,15 @@ class _BottomNavState extends State<BottomNav> {
     );
   }
 
+  /// Returns a widget that represents a bottom navigation bar icon.
+  ///
+  /// [iconData] The icon data to be displayed.
+  /// [index] The index of the icon in the navigation bar.
+  ///
+  /// Example:
+  /// ```dart
+  /// bottomNavIcon(Iconsax.home_2, 0)
+  /// ```
   Widget bottomNavIcon(IconData iconData, int index) {
     bool isSelected = _selectedIndex == index;
     return Container(
