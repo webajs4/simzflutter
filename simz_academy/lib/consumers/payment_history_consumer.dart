@@ -12,6 +12,7 @@ class PaymentHistoryConsumer extends ConsumerWidget {
     final paymentAsyncValue = ref.watch(paymentProvider);
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
           title: HomeUiHelper().customText('Payment History', 20,
               FontWeight.w600, Color.fromRGBO(56, 15, 67, 1))),
       body: Center(
