@@ -4,6 +4,11 @@ import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/providers/sheet_provider.dart';
 
 /// A consumer widget that displays a list of sheets.
+/// A widget that consumes a sheet.
+///
+/// This widget is used to consume a sheet and display its content.
+/// It extends the [ConsumerWidget] class and provides a [key] parameter
+/// to uniquely identify the widget.
 class SheetConsumer extends ConsumerWidget {
   const SheetConsumer({super.key});
 
