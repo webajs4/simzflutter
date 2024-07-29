@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 
 class FooterWidget extends StatelessWidget {
+  const FooterWidget({super.key});
+
   void navigateToScreen(BuildContext context, Widget screen) {
     Navigator.push(
       context,

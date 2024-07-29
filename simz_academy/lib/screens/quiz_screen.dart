@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
-import 'package:simz_academy/consumers/sheet_consumer.dart';
+import 'package:simz_academy/consumers/quiz_consumers.dart';
 
-class SheetScreen extends StatelessWidget {
-  const SheetScreen({super.key});
+class QuizScreen extends StatelessWidget {
+  const QuizScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +21,14 @@ class SheetScreen extends StatelessWidget {
         ),
         title: Center(
           child: HomeUiHelper().customText(
-              'Sheets', 24, FontWeight.w400, Color.fromRGBO(56, 15, 67, 1)),
+              'Quiz', 24, FontWeight.w400, Color.fromRGBO(56, 15, 67, 1)),
         ),
       ),
-      body: const Center(child: SheetConsumer()),
+      body: const Center(
+        child: Center(
+          child: QuizConsumers(),
+        ),
+      ),
     );
   }
 }

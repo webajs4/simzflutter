@@ -63,6 +63,6 @@ class SplashScreen extends StatelessWidget {
       //No internet connection
       networkState = false;
     }
-    print(networkState);
+    //print(networkState);
   }
 }
