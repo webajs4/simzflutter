@@ -3,6 +3,8 @@ import 'package:iconsax/iconsax.dart'; // Ensure you have the iconsax package ad
 import 'package:simz_academy/UIHelper/home_ui_helper.dart'; // Ensure this path is correct
 
 class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

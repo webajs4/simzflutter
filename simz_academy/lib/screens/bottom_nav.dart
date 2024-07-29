@@ -30,7 +30,7 @@ class _BottomNavState extends State<BottomNav> {
             _selectedIndex = index;
           });
         },
-        children: const <Widget>[
+        children: <Widget>[
           HomeScreen(),
           MusicLibraryScreen(),
           CourseScreen(),
