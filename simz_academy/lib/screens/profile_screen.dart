@@ -38,9 +38,16 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             ListTile(
-              leading: CircleAvatar(
-                radius: 30,
-                backgroundImage: AssetImage('assets/image.png'), // Ensure the image is in the assets folder
+              leading: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(
+                    color: Color.fromRGBO(56, 15, 67, 1),
+                    width: 2,
+                  ),
+                ),
+                // child: Image.asset(
+                //     'simzflutter/simz_academy/lib/assets/images/person.png')
               ),
               title: HomeUiHelper().customText(
                 'Student',

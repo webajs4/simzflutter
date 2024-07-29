@@ -118,25 +118,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(4.0),
-                            child: Row(
-                              children: [
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Icon(
-                                  Iconsax.teacher5,
-                                  color: Color.fromRGBO(196, 220, 243, 1),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                HomeUiHelper().customText(
-                                  'Learning Now',
-                                  15,
-                                  FontWeight.normal,
-                                  const Color.fromRGBO(196, 220, 243, 1),
-                                ),
-                              ],
+                            child: SingleChildScrollView(
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  const Icon(
+                                    Iconsax.teacher5,
+                                    color: Color.fromRGBO(196, 220, 243, 1),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  HomeUiHelper().customText(
+                                    'Learning Now',
+                                    15,
+                                    FontWeight.normal,
+                                    const Color.fromRGBO(196, 220, 243, 1),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
