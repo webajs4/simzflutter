@@ -5,8 +5,10 @@ import 'package:simz_academy/screens/no_internet.dart';
 
 // ignore: must_be_immutable
 class SplashScreen extends StatelessWidget {
-  bool networkState = false;
+
   SplashScreen({super.key});
+
+  bool networkState = false;
 
   @override
   Widget build(BuildContext context) {

@@ -3,6 +3,8 @@ import 'package:iconsax/iconsax.dart'; // Ensure you have the iconsax package ad
 import 'package:simz_academy/UIHelper/home_ui_helper.dart'; // Ensure this path is correct
 
 class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,9 +38,16 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             ListTile(
-              leading: CircleAvatar(
-                radius: 30,
-                backgroundImage: AssetImage('assets/image.png'), // Ensure the image is in the assets folder
+              leading: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(
+                    color: Color.fromRGBO(56, 15, 67, 1),
+                    width: 2,
+                  ),
+                ),
+                // child: Image.asset(
+                //     'simzflutter/simz_academy/lib/assets/images/person.png')
               ),
               title: HomeUiHelper().customText(
                 'Student',
