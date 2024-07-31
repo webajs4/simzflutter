@@ -37,48 +37,59 @@ class ProfileScreen extends StatelessWidget {
               Color.fromRGBO(56, 15, 67, 1),
             ),
             SizedBox(height: 16.0),
-            ListTile(
-              leading: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(
-                    color: Color.fromRGBO(56, 15, 67, 1),
-                    width: 2,
+            Container(
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  colors: const [
+                    Color.fromRGBO(56, 15, 67, 0.1),
+                    Color.fromRGBO(56, 15, 67, 0.5),
+                  ],
+                  radius: 0.8,
                   ),
+              ),
+              child: ListTile(
+                leading: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    border: Border.all(
+                      color: Color.fromRGBO(56, 15, 67, 1),
+                      width: 2,
+                    ),
+                  ),
+                  // child: Image.asset(
+                  //     'simzflutter/simz_academy/lib/assets/images/person.png')
                 ),
-                // child: Image.asset(
-                //     'simzflutter/simz_academy/lib/assets/images/person.png')
-              ),
-              title: HomeUiHelper().customText(
-                'Student',
-                18,
-                FontWeight.w500,
-                Color.fromRGBO(56, 15, 67, 1),
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  HomeUiHelper().customText(
-                    'ID: 123456',
-                    14,
-                    FontWeight.w400,
-                    Color.fromRGBO(56, 15, 67, 1),
-                  ),
-                  SizedBox(height: 4.0),
-                  HomeUiHelper().customText(
-                    'Email: student@example.com',
-                    14,
-                    FontWeight.w400,
-                    Color.fromRGBO(56, 15, 67, 1),
-                  ),
-                  SizedBox(height: 4.0),
-                  HomeUiHelper().customText(
-                    'Phone number: (123) 456-7890',
-                    14,
-                    FontWeight.w400,
-                    Color.fromRGBO(56, 15, 67, 1),
-                  ),
-                ],
+                title: HomeUiHelper().customText(
+                  'Student',
+                  18,
+                  FontWeight.w500,
+                  Color.fromRGBO(56, 15, 67, 1),
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    HomeUiHelper().customText(
+                      'ID: 123456',
+                      14,
+                      FontWeight.w400,
+                      Color.fromRGBO(56, 15, 67, 1),
+                    ),
+                    SizedBox(height: 4.0),
+                    HomeUiHelper().customText(
+                      'Email: student@example.com',
+                      14,
+                      FontWeight.w400,
+                      Color.fromRGBO(56, 15, 67, 1),
+                    ),
+                    SizedBox(height: 4.0),
+                    HomeUiHelper().customText(
+                      'Phone number: (123) 456-7890',
+                      14,
+                      FontWeight.w400,
+                      Color.fromRGBO(56, 15, 67, 1),
+                    ),
+                  ],
+                ),
               ),
             ),
             // Add more widgets here as needed
