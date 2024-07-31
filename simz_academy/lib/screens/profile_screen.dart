@@ -25,75 +25,139 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            HomeUiHelper().customText(
-              'Student details',
-              20,
-              FontWeight.w600,
-              Color.fromRGBO(56, 15, 67, 1),
-            ),
-            SizedBox(height: 16.0),
-            Container(
-              decoration: BoxDecoration(
-                gradient: RadialGradient(
-                  colors: const [
-                    Color.fromRGBO(56, 15, 67, 0.1),
-                    Color.fromRGBO(56, 15, 67, 0.5),
-                  ],
-                  radius: 0.8,
-                  ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HomeUiHelper().customText(
+                'Student details',
+                20,
+                FontWeight.w600,
+                Color.fromRGBO(56, 15, 67, 1),
               ),
-              child: ListTile(
-                leading: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    border: Border.all(
-                      color: Color.fromRGBO(56, 15, 67, 1),
-                      width: 2,
-                    ),
+              SizedBox(height: 16.0),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  color: Colors.white,
+                  gradient: RadialGradient(
+                    colors: const [
+                      Color.fromRGBO(56, 15, 67, 1),
+                      Color.fromRGBO(91, 40, 103, 1),
+                    ],
+                    radius: 0.8,
                   ),
-                  // child: Image.asset(
-                  //     'simzflutter/simz_academy/lib/assets/images/person.png')
                 ),
-                title: HomeUiHelper().customText(
-                  'Student',
-                  18,
-                  FontWeight.w500,
-                  Color.fromRGBO(56, 15, 67, 1),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 80.0,
+                        width: 80.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage('lib/assets/images/person.png'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          HomeUiHelper().customText(
+                            'Alan Jose Santo',
+                            32,
+                            FontWeight.w600,
+                            Color.fromRGBO(251, 246, 253, 1),
+                          ),
+                          HomeUiHelper().customText(
+                            'simzacademy829347',
+                            16,
+                            FontWeight.w400,
+                            Color.fromRGBO(251, 246, 253, 1),
+                          ),
+                          HomeUiHelper().customText(
+                            'abc@test.com',
+                            16,
+                            FontWeight.w400,
+                            Color.fromRGBO(251, 246, 253, 1),
+                          ),
+                          HomeUiHelper().customText(
+                            '28349242902',
+                            16,
+                            FontWeight.w400,
+                            Color.fromRGBO(251, 246, 253, 1),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    HomeUiHelper().customText(
-                      'ID: 123456',
-                      14,
-                      FontWeight.w400,
-                      Color.fromRGBO(56, 15, 67, 1),
-                    ),
-                    SizedBox(height: 4.0),
-                    HomeUiHelper().customText(
-                      'Email: student@example.com',
-                      14,
-                      FontWeight.w400,
-                      Color.fromRGBO(56, 15, 67, 1),
-                    ),
-                    SizedBox(height: 4.0),
-                    HomeUiHelper().customText(
-                      'Phone number: (123) 456-7890',
-                      14,
-                      FontWeight.w400,
-                      Color.fromRGBO(56, 15, 67, 1),
+              ),
+              SizedBox(height: 16.0),
+              HomeUiHelper().customText("Your Courses", 20, FontWeight.w600,
+                  Color.fromRGBO(56, 15, 67, 1)),
+              SizedBox(
+                height:
+                    120.0, // Specify a fixed height for the CustomScrollView
+                child: CustomScrollView(
+                  scrollDirection: Axis.horizontal,
+                  slivers: [
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          return Container(
+                            margin: EdgeInsets.only(right: 16.0),
+                            width: 425.0,
+                            height: 200.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16.0),
+                              color: Color.fromRGBO(196, 220, 243, 1),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: 300.0,
+                                        child: Text(
+                                          'Scales and Theory of KeyBoard',
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color.fromRGBO(27, 60, 95, 1),
+                                          ),
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      HomeUiHelper().customText('12 Lessons', 20, FontWeight.w300, Color.fromRGBO(27, 60, 95, 1)),
+                                    ],
+                                  ),
+                                ),
+                                Image.asset('lib/assets/images/sheets.png',
+                                    width: 100.0, height: 100.0,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        childCount: 3,
+                      ),
                     ),
                   ],
                 ),
               ),
-            ),
-            // Add more widgets here as needed
-          ],
+            ],
+          ),
         ),
       ),
     );
