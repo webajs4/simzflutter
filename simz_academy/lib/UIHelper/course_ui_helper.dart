@@ -11,6 +11,7 @@ class CourseUiHelper {
         fontWeight: fontWeight,
         color: color,
       ),
+      overflow: TextOverflow.ellipsis, // Set the overflow property
     );
   }
 }
