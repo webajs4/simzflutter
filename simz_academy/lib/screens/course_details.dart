@@ -7,8 +7,13 @@ import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 class CourseDetails extends StatefulWidget {
   final String course_id;
   final String course_instructor;
+  final String course_title;
   const CourseDetails(
-      {super.key, required this.course_id, required this.course_instructor});
+      {super.key,
+      required this.course_id,
+      required this.course_instructor,
+      required this.course_title,
+      });
 
   @override
   State<CourseDetails> createState() => _CourseDetailsState();
@@ -16,7 +21,8 @@ class CourseDetails extends StatefulWidget {
 
 class _CourseDetailsState extends State<CourseDetails> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
+    
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -81,36 +87,54 @@ class _CourseDetailsState extends State<CourseDetails> {
                         const Color.fromRGBO(181, 95, 214, 1),
                       ),
                     ),
-                    onPressed: () {},                      
+                    onPressed: () {},
                     child: Row(
                       children: [
                         CircleAvatar(
                           radius: 15,
-                            child: Center(
+                          child: Center(
                             child: CircleAvatar(
                               radius: 15,
-                              backgroundImage: AssetImage('lib/assets/images/person.png'),
+                              backgroundImage:
+                                  AssetImage('lib/assets/images/person.png'),
                               backgroundColor: Colors.transparent,
                               foregroundColor: Colors.white,
                               child: Image.asset(
-                              'lib/assets/images/person.png',
-                              fit: BoxFit.cover,
+                                'lib/assets/images/person.png',
+                                fit: BoxFit.cover,
                               ),
                             ),
-                            ),
+                          ),
                         ),
                         SizedBox(width: 10),
                         HomeUiHelper().customText(
                           widget.course_instructor,
                           18,
                           FontWeight.w600,
-                           Color.fromRGBO(251, 246, 253, 1),
+                          Color.fromRGBO(251, 246, 253, 1),
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
+              Positioned(
+                top: 125,
+                left: 15,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      children: [
+                        HomeUiHelper().customText(widget.course_title, 32, FontWeight.w600,
+                            Color.fromRGBO(251, 246, 253, 1))
+                      ],
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ],

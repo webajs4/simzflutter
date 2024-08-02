@@ -103,15 +103,17 @@ class CourseCard extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
+                            String courseName = title.toString();
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => CourseDetails(
-                                    course_id: course_id,
-                                    course_instructor: course_instructor,
-                                  ),
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CourseDetails(
+                                  course_id: course_id,
+                                  course_instructor: course_instructor,
+                                  course_title: courseName,
                                 ),
-                              );
+                              ),
+                            );
                           },
                           child: Row(
                             children: [
