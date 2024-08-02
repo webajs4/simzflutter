@@ -104,6 +104,8 @@ class _MyCoursesState extends State<CourseScreen> {
                       subtitle: 'Course Description', 
                       review: courses[index]['course_review'] != null ? courses[index]['course_review'].toDouble() : 0.0,
                       fees: courses[index]['course_price'].toDouble(),
+                      course_id: courses[index]['course_id'].toString(),
+                      course_instructor: courses[index]['course_instructor'].toString(),
                     );
                   },
                 );

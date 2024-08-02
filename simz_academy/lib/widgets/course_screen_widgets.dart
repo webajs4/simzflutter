@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:simz_academy/UIHelper/course_ui_helper.dart';
+import 'package:simz_academy/screens/course_details.dart';
 
 class CourseCard extends StatelessWidget {
   final String imageUrl;
@@ -9,6 +10,10 @@ class CourseCard extends StatelessWidget {
   final String subtitle;
   final double review;
   final double fees;
+  // ignore: non_constant_identifier_names
+  final String course_id;
+   // ignore: non_constant_identifier_names
+  final String course_instructor;
 
   const CourseCard({
     super.key,
@@ -17,6 +22,10 @@ class CourseCard extends StatelessWidget {
     required this.subtitle,
     required this.review,
     required this.fees,
+     // ignore: non_constant_identifier_names
+    required this.course_id,
+     // ignore: non_constant_identifier_names
+    required this.course_instructor,
   });
 
   @override
@@ -93,7 +102,17 @@ class CourseCard extends StatelessWidget {
                               const Color.fromRGBO(129, 50, 153, 1),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CourseDetails(
+                                    course_id: course_id,
+                                    course_instructor: course_instructor,
+                                  ),
+                                ),
+                              );
+                          },
                           child: Row(
                             children: [
                               CourseUiHelper().customText(
@@ -123,7 +142,9 @@ class CourseCard extends StatelessWidget {
                                 const Color.fromRGBO(236, 215, 247, 1),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              
+                            },
                             icon: const Icon(
                               IconsaxPlusLinear.call_calling,
                               color: Color.fromRGBO(129, 50, 153, 1),
