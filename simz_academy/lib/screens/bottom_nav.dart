@@ -35,7 +35,7 @@ class _BottomNavState extends State<BottomNav> {
           MusicLibraryScreen(),
           CourseScreen(),
           FeeScreen(),
-          ProfileScreen(),
+          ProfileScreen(key: null,),
         ],
       ),
       bottomNavigationBar: Padding(

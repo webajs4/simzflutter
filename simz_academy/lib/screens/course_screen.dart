@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:simz_academy/UIHelper/course_ui_helper.dart';
+import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/widgets/common_widgets.dart';
 import 'package:simz_academy/widgets/course_screen_widgets.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 String imagepath = "lib/assets/images/course2.png";
 
@@ -14,6 +16,8 @@ class CourseScreen extends StatefulWidget {
 }
 
 class _MyCoursesState extends State<CourseScreen> {
+  final allCourses =
+      Supabase.instance.client.from('all_courses').stream(primaryKey: ['id']);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,30 +67,50 @@ class _MyCoursesState extends State<CourseScreen> {
             const SizedBox(
               height: 10,
             ),
-            CourseCard(
-                imageUrl: imagepath,
-                title: 'Course Title',
-                subtitle: 'Course Description',
-                review: 4.5,
-                fees: 100),
-            CourseCard(
-                imageUrl: imagepath,
-                title: 'Course Title',
-                subtitle: 'Course Description',
-                review: 4.5,
-                fees: 100),
-            CourseCard(
-                imageUrl: imagepath,
-                title: 'Course Title',
-                subtitle: 'Course Description',
-                review: 4.5,
-                fees: 100),
-            CourseCard(
-                imageUrl: imagepath,
-                title: 'Course Title',
-                subtitle: 'Course Description',
-                review: 4.5,
-                fees: 100),
+            HomeUiHelper().customText(
+              'All Courses',
+              24,
+              FontWeight.w600,
+              Color.fromRGBO(56, 15, 67, 1),
+            ),
+            StreamBuilder<List<Map<String, dynamic>>>(
+              stream: allCourses,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: AlertDialog(
+                      title: const Text('Error'),
+                      content: Text('${snapshot.error}'),
+                    ),
+                  );
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return Center(
+                    child: Text('No Courses Available'),
+                  );
+                }
+                final courses = snapshot.data!;
+                return ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: courses.length,
+                  itemBuilder: (context, index) {
+                    return CourseCard(
+                      imageUrl: imagepath,
+                      title: courses[index]['course_name'].toString(),
+                      subtitle: 'Course Description', 
+                      review: courses[index]['course_review'] != null ? courses[index]['course_review'].toDouble() : 0.0,
+                      fees: courses[index]['course_price'].toDouble(),
+                      course_id: courses[index]['course_id'].toString(),
+                      course_instructor: courses[index]['course_instructor'].toString(),
+                    );
+                  },
+                );
+              },
+            ),
             FooterWidget()
           ],
         ),

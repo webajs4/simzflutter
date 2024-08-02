@@ -5,6 +5,7 @@ class HomeUiHelper {
   Text customText(
       String content, double fontSize, FontWeight fontWeight, Color color) {
     return Text(
+      maxLines: 3,
       content,
       style: GoogleFonts.blinker(
         fontSize: fontSize,
