@@ -32,7 +32,7 @@ class MusicLibraryScreenState extends State<MusicLibraryScreen> {
       body: Column(children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(
-              top: 10.0, bottom: 10.0, left: 12.0, right: 12.0),
+              top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
           child: TextField(
             decoration: InputDecoration(
               hintText: 'Search Classes',
@@ -44,7 +44,7 @@ class MusicLibraryScreenState extends State<MusicLibraryScreen> {
                 color: Color.fromRGBO(205, 140, 230, 1),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(16),
                 borderSide: BorderSide(
                   color: Color.fromRGBO(246, 235, 252, 1),
                 ),
@@ -54,16 +54,30 @@ class MusicLibraryScreenState extends State<MusicLibraryScreen> {
             ),
           ),
         ),
-        Container(
-          width: 365,
-          height: 101,
-          decoration: ShapeDecoration(
-            color: Color(0xFF813299),
-            shape: RoundedRectangleBorder(
+        Padding(
+          padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+          child: Container(
+            width: 365,
+            height: 101,
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(17),
+              gradient: RadialGradient(
+                colors:const [
+                  Color.fromRGBO(129, 50, 153, 1),
+                  Color.fromRGBO(205, 140, 230, 1),
+                ],
+                center: Alignment.center,
+                radius: 3,
+              ),
+            ),
+            child: Row(
+              children: [
+                
+              ],
             ),
           ),
-        )
+        ),
       ]),
     );
   }
