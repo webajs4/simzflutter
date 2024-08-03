@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simz_academy/screens/splash_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+
 Future<void> main() async {
   await Supabase.initialize(
       url: 'https://nsnsqbbmcjzjadfrsieo.supabase.co',
