@@ -139,7 +139,7 @@ class MusicLibraryScreenState extends State<MusicLibraryScreen> {
                         return InkWell(
                           onTap: (){
                             Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                              return VideoPlayer(videoUrl: videoId);
+                              return VideoPlayer(videoUrl: videoId, title: musicData[index]['music_title']);
                             }));
                           },
                           child: Padding(

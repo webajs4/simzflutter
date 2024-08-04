@@ -9,7 +9,7 @@ import 'package:simz_academy/screens/profile_screen.dart';
 
 /// A stateful widget that displays a bottom navigation bar with five tabs.
 class BottomNav extends StatefulWidget {
-  const BottomNav({super.key});
+  const BottomNav({super.key,});
 
   @override
   State<BottomNav> createState() => _BottomNavState();
@@ -17,6 +17,7 @@ class BottomNav extends StatefulWidget {
 
 /// The state of the [BottomNav] widget.
 class _BottomNavState extends State<BottomNav> {
+
   int _selectedIndex = 0;
   final PageController _pageController = PageController(initialPage: 0);
 
