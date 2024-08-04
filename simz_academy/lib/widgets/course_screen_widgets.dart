@@ -118,7 +118,7 @@ class CourseCard extends StatelessWidget {
                           child: Row(
                             children: [
                               CourseUiHelper().customText(
-                                'Buy Now   ',
+                                'Buy Now  ',
                                 16,
                                 FontWeight.normal,
                                 const Color.fromRGBO(251, 246, 253, 1),
@@ -131,7 +131,7 @@ class CourseCard extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 8),
+                          padding: const EdgeInsets.only(left: 5),
                           child: IconButton(
                             style: ButtonStyle(
                               shape: WidgetStateProperty.all<
