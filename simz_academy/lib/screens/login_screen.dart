@@ -1,90 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController(); // emailController variable
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset('assets/login.png', height: 200),
-              SizedBox(height: 20),
-              Text(
-                'LOGIN',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
-              ),
-              SizedBox(height: 20),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Email Address',
-                  hintText: 'Enter your email',
-                  filled: true,
-                  fillColor: Colors.purple[50],
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            const SizedBox(
+              height: 100,
+            ),
+
+            //Login image
+            Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                height: 216,
+                width: 215,
+                child: Image.asset(
+                  'lib/assets/images/login.png',
                 ),
               ),
-              SizedBox(height: 20),
-              TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  hintText: 'Enter your password',
-                  filled: true,
-                  fillColor: Colors.purple[50],
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                  suffixIcon: Icon(Icons.visibility_off),
-                ),
-              ),
-              SizedBox(height: 10),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Forget Password?',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  //primary: Colors.purple,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                ),
-                child: Text('Login', style: TextStyle(fontSize: 18)),
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Don't have an account?"),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Sign up',
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+
+            //Login text
+            HomeUiHelper().customText(
+              'LOGIN',
+              36,
+              FontWeight.w600,
+              Color(0xFF380F43),
+            ),
+
+            //Login form
+            const SizedBox(
+              height: 20,
+            ),
+            HomeUiHelper().customText('Email Address', 16,FontWeight.w600,Color(0xFF380F43)),
+            TextField(
+              controller: emailController,
+            ),
+          ],
         ),
       ),
     );
