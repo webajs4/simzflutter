@@ -3,22 +3,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/screens/forgot_password.dart';
-import 'package:simz_academy/screens/sign_up_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailController =
-      TextEditingController(); // emailController variable
-  final TextEditingController _passwordController =
-      TextEditingController(); // passwordController variable
+class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController emailController = TextEditingController(); // emailController variable
+  final TextEditingController _passwordController = TextEditingController(); // passwordController variable
+  final TextEditingController _phoneNumberController = TextEditingController(); // phoneNumberController variable
   bool isPasswordVisible = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 const SizedBox(
-                  height: 100,
+                  height: 80,
                 ),
           
                 //Login image
@@ -41,14 +38,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 216,
                     width: 215,
                     child: Image.asset(
-                      'lib/assets/images/login.png',
+                      'lib/assets/images/sign_up.png',
                     ),
                   ),
                 ),
           
                 //Login text
                 HomeUiHelper().customText(
-                  'LOGIN',
+                  'Register',
                   36,
                   FontWeight.w600,
                   Color(0xFF380F43),
@@ -79,6 +76,33 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   controller: emailController,
+                ),
+
+                const SizedBox(
+                  height: 10,
+                ),
+                //Phone Number section
+                HomeUiHelper().customText(
+                    'Phone Number', 16, FontWeight.w600, Color(0xFF380F43)),
+
+                SizedBox(height: 5),
+
+                TextField(
+                  controller: _phoneNumberController,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Color(0xFFECD7F7),
+                    hintText: 'Enter your Phone Number',
+                    hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 209, 190, 219),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Color(0xFFECD7F7),
+                      ),
+                    ),
+                  ),
                 ),
           
                 const SizedBox(
@@ -140,6 +164,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     print(emailController.text);
                     print(_passwordController.text);
+                    print(_phoneNumberController.text);
+
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 4,
@@ -151,16 +177,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   child: HomeUiHelper().customText(
-                      'Login', 24, FontWeight.w700, Color(0xFFECD7F7)),
+                      'Sign Up', 24, FontWeight.w700, Color(0xFFECD7F7)),
                 ),
           
-                //Navigate to Sign up
+                //Navigate to Sign In
                 SizedBox(height: 25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Don\'t have an account?  ',
+                      'Have an account?  ',
                       style: GoogleFonts.inter(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
@@ -169,13 +195,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return SignUpScreen();
-                        }));
+                        Navigator.of(context).pop();
                       },
                       child: Text(
-                        'Sign Up',
+                        'Login',
                         style: GoogleFonts.inter(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
