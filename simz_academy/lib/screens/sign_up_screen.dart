@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/screens/forgot_password.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -12,10 +13,14 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController emailController = TextEditingController(); // emailController variable
-  final TextEditingController _passwordController = TextEditingController(); // passwordController variable
-  final TextEditingController _phoneNumberController = TextEditingController(); // phoneNumberController variable
+  TextEditingController emailController =
+      TextEditingController(); // emailController variable
+  final TextEditingController _passwordController =
+      TextEditingController(); // passwordController variable
+  final TextEditingController _phoneNumberController =
+      TextEditingController(); // phoneNumberController variable
   bool isPasswordVisible = false;
+  final supabase = Supabase.instance.client;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 80,
                 ),
-          
+
                 //Login image
                 Align(
                   alignment: Alignment.center,
@@ -42,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
-          
+
                 //Login text
                 HomeUiHelper().customText(
                   'Register',
@@ -50,12 +55,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   FontWeight.w600,
                   Color(0xFF380F43),
                 ),
-          
+
                 //Login form
                 const SizedBox(
                   height: 10,
                 ),
-          
+
                 //email section
                 HomeUiHelper().customText(
                     'Email Address', 16, FontWeight.w600, Color(0xFF380F43)),
@@ -104,7 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
-          
+
                 const SizedBox(
                   height: 10,
                 ),
@@ -140,7 +145,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   controller: _passwordController,
                 ),
-          
+
                 const SizedBox(
                   height: 10,
                 ),
@@ -157,15 +162,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: HomeUiHelper().customText('Forgot Password?', 16,
                           FontWeight.w500, Color(0xFF380F43))),
                 ),
-          
+
                 //login button
                 SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () {
-                    print(emailController.text);
-                    print(_passwordController.text);
-                    print(_phoneNumberController.text);
-
+                  onPressed: () async {
+                    final sm = ScaffoldMessenger.of(context);
+                    if (emailController.text.isEmpty &&
+                        _phoneNumberController.text.isEmpty) {
+                      sm.showSnackBar(SnackBar(
+                        content: Text(
+                            'Please provide either an email or phone number'),
+                      ));
+                    } else {
+                      print(emailController.text);
+                      print(_passwordController.text);
+                      print(_phoneNumberController.text);
+                      final authResponse = await supabase.auth.signUp(
+                        //email: emailController.text,
+                        password: _passwordController.text,
+                        phone: _phoneNumberController.text,
+                      );
+                      sm.showSnackBar(SnackBar(
+                        content:
+                            Text('Logged In: ${authResponse.user!.email!}'),
+                      ));
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 4,
@@ -177,9 +199,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   child: HomeUiHelper().customText(
-                      'Sign Up', 24, FontWeight.w700, Color(0xFFECD7F7)),
+                    'Sign Up',
+                    24,
+                    FontWeight.w700,
+                    Color(0xFFECD7F7),
+                  ),
                 ),
-          
+
                 //Navigate to Sign In
                 SizedBox(height: 25),
                 Row(

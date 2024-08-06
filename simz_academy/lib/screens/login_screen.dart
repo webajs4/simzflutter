@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/screens/forgot_password.dart';
 import 'package:simz_academy/screens/sign_up_screen.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController =
       TextEditingController(); // passwordController variable
   bool isPasswordVisible = false;
-
+  final supabase = Supabase.instance.client;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,6 +141,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     print(emailController.text);
                     print(_passwordController.text);
+                    final authResponse=supabase.auth.signInWithPassword(email: emailController.text, password: _passwordController.text);
+                    print(authResponse);
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 4,
