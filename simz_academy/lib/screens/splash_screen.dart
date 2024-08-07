@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:simz_academy/screens/bottom_nav.dart';
+//import 'package:simz_academy/screens/bottom_nav.dart';
+import 'package:simz_academy/screens/login_screen.dart';
 import 'package:simz_academy/screens/no_internet.dart';
 
 // ignore: must_be_immutable
@@ -19,7 +20,7 @@ class SplashScreen extends StatelessWidget {
         if (networkState==true) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const BottomNav()),
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
           );
         }
         else{
