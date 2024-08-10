@@ -179,9 +179,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       print(_passwordController.text);
                       print(_phoneNumberController.text);
                       final authResponse = await supabase.auth.signUp(
-                        //email: emailController.text,
+                        email: emailController.text,
                         password: _passwordController.text,
-                        phone: _phoneNumberController.text,
+                        //phone: _phoneNumberController.text,
                       );
                       sm.showSnackBar(SnackBar(
                         content:
