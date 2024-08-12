@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:simz_academy/constants/supabase_functions.dart';
 import 'package:simz_academy/screens/quiz_screen.dart';
 import 'package:simz_academy/screens/practise_screen.dart';
 import 'package:simz_academy/screens/sheet_screen.dart';
@@ -46,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const Color.fromRGBO(56, 15, 67, 1.0),
                               ),
                               HomeUiHelper().customText(
-                                'Alan Jose Santo',
+                                getCurrentUserId(),
                                 24,
                                 FontWeight.w600,
                                 const Color.fromRGBO(56, 15, 67, 1.0),
