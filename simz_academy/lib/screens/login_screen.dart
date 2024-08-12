@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:simz_academy/screens/forgot_password.dart';
 import 'package:simz_academy/screens/sign_up_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -34,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 100,
                 ),
-          
+
                 //Login image
                 Align(
                   alignment: Alignment.center,
@@ -46,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-          
+
                 //Login text
                 HomeUiHelper().customText(
                   'LOGIN',
@@ -54,12 +55,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   FontWeight.w600,
                   Color(0xFF380F43),
                 ),
-          
+
                 //Login form
                 const SizedBox(
                   height: 10,
                 ),
-          
+
                 //email section
                 HomeUiHelper().customText(
                     'Email Address', 16, FontWeight.w600, Color(0xFF380F43)),
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   controller: emailController,
                 ),
-          
+
                 const SizedBox(
                   height: 10,
                 ),
@@ -117,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   controller: _passwordController,
                 ),
-          
+
                 const SizedBox(
                   height: 10,
                 ),
@@ -134,15 +135,31 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: HomeUiHelper().customText('Forgot Password?', 16,
                           FontWeight.w500, Color(0xFF380F43))),
                 ),
-          
+
                 //login button
                 SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () {
-                    print(emailController.text);
-                    print(_passwordController.text);
-                    final authResponse=supabase.auth.signInWithPassword(email: emailController.text, password: _passwordController.text);
-                    print(authResponse);
+                  onPressed: () async {
+                    try {
+                      final response = await Supabase.instance.client.auth
+                          .signInWithPassword(
+                        email: emailController.text,
+                        password: _passwordController.text,
+                      );
+
+                      // Check if session is not null, meaning login was successful
+                      if (response.session != null) {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => BottomNav()));
+                      } else {
+                        // Handle error (e.g., invalid credentials)
+                        print(
+                            'Error: Invalid credentials or something went wrong.');
+                      }
+                    } catch (e) {
+                      // Handle exception (network issues, etc.)
+                      print('Error: $e');
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 4,
@@ -156,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: HomeUiHelper().customText(
                       'Login', 24, FontWeight.w700, Color(0xFFECD7F7)),
                 ),
-          
+
                 //Navigate to Sign up
                 SizedBox(height: 25),
                 Row(
