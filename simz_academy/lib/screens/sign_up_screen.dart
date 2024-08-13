@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:simz_academy/constants/supabase_functions.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:simz_academy/screens/forgot_password.dart';
+import 'package:simz_academy/screens/redirect_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -171,54 +173,47 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ElevatedButton(
                   onPressed: () async {
                     final sm = ScaffoldMessenger.of(context);
-                    bool isEmailValid(String email) {
-                      return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                          .hasMatch(email);
-                    }
-
-                    if (emailController.text.isEmpty &&
-                        _phoneNumberController.text.isEmpty) {
-                      sm.showSnackBar(SnackBar(
-                        content: Text(
-                            'Please provide either an email or phone number'),
-                      ));
-                    } else if (emailController.text.isNotEmpty &&
-                        !isEmailValid(emailController.text)) {
-                      sm.showSnackBar(SnackBar(
-                        content: Text('Please enter a valid email address'),
-                      ));
-                    } else if (_passwordController.text.length < 8) {
-                      sm.showSnackBar(SnackBar(
-                        content: Text('Password must be at least 8 characters'),
-                      ));
-                    } else if (!RegExp(r'[!@#%&*()_+=\-?/<>\.,;:\[\]{}|`~]')
-                        .hasMatch(_passwordController.text)) {
-                      sm.showSnackBar(SnackBar(
-                        content: Text(
-                            'Password must contain at least one special character'),
-                      ));
-                    } else {
-                      print(emailController.text);
-                      print(_passwordController.text);
-                      print(_phoneNumberController.text);
-                      print(_userNameController.text);
-                      final authResponse = await supabase.auth.signUp(
-                        email: emailController.text,
-                        password: _passwordController.text,
-                        data: {
-                          "username": _userNameController.text,
-                          "phone": _phoneNumberController.text
-                        },
-                        //phone: _phoneNumberController.text,
-                      );
+                    List condition = SignUpValidator(
+                        context,
+                        emailController,
+                        _passwordController,
+                        _phoneNumberController,
+                        _userNameController);
+                    print(emailController.text);
+                    print(_passwordController.text);
+                    print(_phoneNumberController.text);
+                    print(_userNameController.text);
+                    print(condition.length);
+                    print(condition);
+                    if (condition.length == 0) {
+                      print("Entered IF condition");
+                      try {
+                        final authResponse = await supabase.auth.signUp(
+                          email: emailController.text,
+                          password: _passwordController.text,
+                          data: {
+                            "username": _userNameController.text,
+                            "phone": _phoneNumberController.text
+                          },
+                          //phone: _phoneNumberController.text,
+                        );
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) {
+                        return RedirectPage();
+                      }));
                       sm.showSnackBar(SnackBar(
                         content:
                             Text('Logged In: ${authResponse.user!.email!}'),
                       ));
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) {
-                        return BottomNav();
-                      }));
+                      }
+                      catch (error) {
+                        sm.showSnackBar(SnackBar(content: Text('Error: $error')));
+                        print(error);
+                      }
+                    } else {
+                      sm.showSnackBar(SnackBar(
+                        content: Text('Please Correct the following mistakes: \n${condition.toString().replaceAll('[', '').replaceAll(']', '').replaceAll(', ', '\n')}'),
+                      ));
                     }
                   },
                   style: ElevatedButton.styleFrom(

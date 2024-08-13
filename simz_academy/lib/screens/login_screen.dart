@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:simz_academy/constants/supabase_functions.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:simz_academy/screens/forgot_password.dart';
 import 'package:simz_academy/screens/sign_up_screen.dart';
@@ -141,38 +142,40 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () async {
-                    try {
-                      final response = await Supabase.instance.client.auth
-                          .signInWithPassword(
-                        email: emailController.text,
-                        password: _passwordController.text,
-                      );
-                      if (response != null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Login Successful'),
-                        ),
-                      );
+                    final sm = ScaffoldMessenger.of(context);
+                    List condition = LoginValidator(
+                        context,
+                        emailController,
+                        _passwordController,);
+                    print(emailController.text);
+                    print(_passwordController.text);
+                    print(condition.length);
+                    print(condition);
+                    if (condition.length == 0) {
+                      print("Entered IF condition");
+                      try {
+                        final authResponse = await supabase.auth.signInWithPassword(
+                          email: emailController.text,
+                          password: _passwordController.text,
+                        );
+                      sm.showSnackBar(SnackBar(
+                        content:
+                            Text('Logged In: ${authResponse.user!.email!}'),
+                      ));
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return SplashScreen();
-                          },
-                        ),
-                      );
+                          MaterialPageRoute(builder: (context) {
+                        return BottomNav();
+
+                      }));
+                      }
+                      catch (error) {
+                        sm.showSnackBar(SnackBar(content: Text('Error: $error')));
+                        print(error);
+                      }
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Login Failed'),
-                        ),
-                      );
-                    }
-                    } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Login Failed'),
-                        ),
-                      );
+                      sm.showSnackBar(SnackBar(
+                        content: Text('Please Correct the following mistakes: \n${condition.toString().replaceAll('[', '').replaceAll(']', '').replaceAll(', ', '\n')}'),
+                      ));
                     }
                   },
                   style: ElevatedButton.styleFrom(
