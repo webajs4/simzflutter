@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/providers/quiz_provider.dart';
+import 'package:simz_academy/screens/quizizz_page.dart';
 
 /// A ConsumerWidget that displays a list of quizzes.
 ///
@@ -64,7 +65,7 @@ class QuizConsumers extends ConsumerWidget {
                           )
                         ),
                           onPressed: () {
-                            
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => QuizizzPage(index: index)));
                           },
                           child: HomeUiHelper().customText('Join', 16,
                               FontWeight.w600, Color.fromRGBO(56, 15, 67, 1))),

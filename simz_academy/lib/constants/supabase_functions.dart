@@ -50,7 +50,7 @@ Future<void> SignUp(BuildContext context,
   print('$email, $password, $mobile, $username');
   final sm = ScaffoldMessenger.of(context);
   try {
-    final AuthResponse res = await supabase.auth.signUp(
+    await supabase.auth.signUp(
       email: email,
       password: password,
       // phone: mobile,
