@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
-import 'package:simz_academy/screens/home_screen.dart';
+//import 'package:simz_academy/screens/home_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class RedirectPage extends StatefulWidget {
@@ -24,6 +24,7 @@ class _RedirectPageState extends State<RedirectPage> {
     final user = supabase.auth.currentUser;
 
     if (user != null) {
+      // ignore: unused_local_variable
       final isConfirmed = user.emailConfirmedAt != null;
       setState(() {
         _isConfirmed = true;

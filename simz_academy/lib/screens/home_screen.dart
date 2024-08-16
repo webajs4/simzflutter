@@ -9,6 +9,8 @@ import 'package:simz_academy/screens/sheet_screen.dart';
 import 'package:simz_academy/screens/syllabus_screen.dart';
 import 'package:simz_academy/widgets/home_screen_widgets.dart';
 
+
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -210,8 +212,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ),
                                     ),
-                                    onPressed: () {
-                                      // navigate to a required page --> lesson tracking
+                                    onPressed: () async{
+
                                     },
                                     child: const Text(
                                       'Track Lessons',

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:simz_academy/UIHelper/home_ui_helper.dart';
-import 'package:simz_academy/constants/supabase_functions.dart';
-import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:simz_academy/screens/forgot_password.dart';
-import 'package:simz_academy/screens/redirect_page.dart';
+import 'package:simz_academy/screens/otp_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -16,113 +13,115 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController emailController =
-      TextEditingController(); // emailController variable
-  final TextEditingController _passwordController =
-      TextEditingController(); // passwordController variable
-  final TextEditingController _phoneNumberController =
-      TextEditingController(); // phoneNumberController variable
-  final TextEditingController _userNameController =
-      TextEditingController(); // user name  variable
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
   bool isPasswordVisible = false;
   final supabase = Supabase.instance.client;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding:
-                const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const SizedBox(
-                  height: 80,
-                ),
+                const SizedBox(height: 80),
 
-                //Login image
+                // Sign-up image
                 Align(
                   alignment: Alignment.center,
                   child: SizedBox(
                     height: 216,
                     width: 215,
-                    child: Image.asset(
-                      'lib/assets/images/sign_up.png',
-                    ),
+                    child: Image.asset('lib/assets/images/sign_up.png'),
                   ),
                 ),
 
-                //Login text
-                HomeUiHelper().customText(
+                // Sign-up text
+                Text(
                   'Register',
-                  36,
-                  FontWeight.w600,
-                  Color(0xFF380F43),
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF380F43),
+                  ),
                 ),
 
-                //Login form
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
 
-                //email section
-                HomeUiHelper().customText(
-                    'Email Address', 16, FontWeight.w600, Color(0xFF380F43)),
-                SizedBox(height: 5),
+                // Email section
+                Text(
+                  'Email Address',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF380F43),
+                  ),
+                ),
+                const SizedBox(height: 5),
                 TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Color(0xFFECD7F7),
+                    fillColor: const Color(0xFFECD7F7),
                     hintText: 'Enter your email address',
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       color: Color.fromARGB(255, 209, 190, 219),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        color: Color(0xFFECD7F7),
-                      ),
+                      borderSide: BorderSide.none,
                     ),
                   ),
-                  controller: emailController,
                 ),
 
-                const SizedBox(
-                  height: 10,
+                const SizedBox(height: 10),
+
+                // Phone Number section
+                Text(
+                  'Phone Number',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF380F43),
+                  ),
                 ),
-                //Phone Number section
-                HomeUiHelper().customText(
-                    'Phone Number', 16, FontWeight.w600, Color(0xFF380F43)),
-
-                SizedBox(height: 5),
-
+                const SizedBox(height: 5),
                 TextField(
                   controller: _phoneNumberController,
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Color(0xFFECD7F7),
+                    fillColor: const Color(0xFFECD7F7),
                     hintText: 'Enter your Phone Number',
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       color: Color.fromARGB(255, 209, 190, 219),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        color: Color(0xFFECD7F7),
-                      ),
+                      borderSide: BorderSide.none,
                     ),
                   ),
                 ),
 
-                const SizedBox(
-                  height: 10,
+                const SizedBox(height: 10),
+
+                // Password section
+                Text(
+                  'Password',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF380F43),
+                  ),
                 ),
-                //password section
-                HomeUiHelper().customText(
-                    'Password', 16, FontWeight.w600, Color(0xFF380F43)),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 TextField(
+                  controller: _passwordController,
                   obscureText: !isPasswordVisible,
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
@@ -131,63 +130,81 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           isPasswordVisible = !isPasswordVisible;
                         });
                       },
-                      icon: (isPasswordVisible)
-                          ? Icon(Iconsax.eye)
-                          : Icon(Iconsax.eye_slash),
+                      icon: isPasswordVisible
+                          ? const Icon(Iconsax.eye)
+                          : const Icon(Iconsax.eye_slash),
                     ),
                     filled: true,
-                    fillColor: Color(0xFFECD7F7),
+                    fillColor: const Color(0xFFECD7F7),
                     hintText: 'Enter your Password',
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       color: Color.fromARGB(255, 209, 190, 219),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        color: Color(0xFFECD7F7),
-                      ),
+                      borderSide: BorderSide.none,
                     ),
                   ),
-                  controller: _passwordController,
                 ),
 
-                const SizedBox(
-                  height: 10,
-                ),
-                //forgot password
+                const SizedBox(height: 10),
+
+                // Forgot password
                 Align(
                   alignment: Alignment.centerRight,
                   child: InkWell(
-                      onTap: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return ForgotPasswordScreen();
-                        }));
-                      },
-                      child: HomeUiHelper().customText('Forgot Password?', 16,
-                          FontWeight.w500, Color(0xFF380F43))),
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const ForgotPasswordScreen(),
+                      ));
+                    },
+                    child: Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xFF380F43),
+                      ),
+                    ),
+                  ),
                 ),
 
-                //sign up button
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
+
+                // Sign-up button
                 ElevatedButton(
                   onPressed: () async {
                     final sm = ScaffoldMessenger.of(context);
-                    List condition = SignUpValidator(
-                        context,
-                        emailController,
-                        _passwordController,
-                        _phoneNumberController,
-                        _userNameController);
-                    print(emailController.text);
-                    print(_passwordController.text);
-                    print(_phoneNumberController.text);
-                    print(_userNameController.text);
-                    print(condition.length);
-                    print(condition);
-                    if (condition.length == 0) {
-                      print("Entered IF condition");
-                      try {
+
+                    bool isEmailValid(String email) {
+                      return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                          .hasMatch(email);
+                    }
+
+                    try {
+                      if (emailController.text.isEmpty &&
+                          _phoneNumberController.text.isEmpty) {
+                        sm.showSnackBar(const SnackBar(
+                          content: Text(
+                              'Please provide either an email or phone number'),
+                        ));
+                      } else if (emailController.text.isNotEmpty &&
+                          !isEmailValid(emailController.text)) {
+                        sm.showSnackBar(const SnackBar(
+                          content: Text('Please enter a valid email address'),
+                        ));
+                      } else if (_passwordController.text.length < 8) {
+                        sm.showSnackBar(const SnackBar(
+                          content: Text(
+                              'Password must be at least 8 characters long'),
+                        ));
+                      } else if (!RegExp(r'[!@#%&*()_+=\-?/<>\.,;:\[\]{}|`~]')
+                          .hasMatch(_passwordController.text)) {
+                        sm.showSnackBar(const SnackBar(
+                          content: Text(
+                              'Password must contain at least one special character'),
+                        ));
+                      } else {
                         final authResponse = await supabase.auth.signUp(
                           email: emailController.text,
                           password: _passwordController.text,
@@ -195,46 +212,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             "username": _userNameController.text,
                             "phone": _phoneNumberController.text
                           },
-                          //phone: _phoneNumberController.text,
                         );
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) {
-                        return RedirectPage();
-                      }));
-                      sm.showSnackBar(SnackBar(
-                        content:
-                            Text('Logged In: ${authResponse.user!.email!}'),
-                      ));
+                        sm.showSnackBar(SnackBar(
+                          content:
+                              Text('Verify your account using OTP that has sent to :  ${authResponse.user!.email!}'),
+                        ));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                          return const OtpScreen();
+                        }));
                       }
-                      catch (error) {
-                        sm.showSnackBar(SnackBar(content: Text('Error: $error')));
-                        print(error);
-                      }
-                    } else {
+                    } catch (error) {
                       sm.showSnackBar(SnackBar(
-                        content: Text('Please Correct the following mistakes: \n${condition.toString().replaceAll('[', '').replaceAll(']', '').replaceAll(', ', '\n')}'),
-                      ));
+                          content: Text('Error signing up: $error')));
                     }
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 4,
-                    shadowColor: Color.fromRGBO(137, 60, 162, 1),
-                    backgroundColor: Color.fromRGBO(137, 60, 162, 1),
-                    minimumSize: Size(double.infinity, 60),
+                    shadowColor: const Color.fromRGBO(137, 60, 162, 1),
+                    backgroundColor: const Color.fromRGBO(137, 60, 162, 1),
+                    minimumSize: const Size(double.infinity, 60),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child: HomeUiHelper().customText(
+                  child: Text(
                     'Sign Up',
-                    24,
-                    FontWeight.w700,
-                    Color(0xFFECD7F7),
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                      color: const Color(0xFFECD7F7),
+                    ),
                   ),
                 ),
 
-                //Navigate to Sign In
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
+
+                // Navigate to Sign In
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -243,7 +256,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       style: GoogleFonts.inter(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xFF380F43),
+                        color: const Color(0xFF380F43),
                       ),
                     ),
                     InkWell(
@@ -255,7 +268,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: GoogleFonts.inter(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
-                          color: Color(0xFFC61515),
+                          color: const Color(0xFFC61515),
                         ),
                       ),
                     ),

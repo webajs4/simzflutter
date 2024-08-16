@@ -29,11 +29,15 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   carousel_slider: ^5.0.0
+  connectivity_plus: ^6.0.3
   cupertino_icons: ^1.0.6
   curved_labeled_navigation_bar: ^2.0.2
   curved_navigation_bar: null
+  external_app_launcher: ^4.0.0
   flutter:
     sdk: flutter
+  flutter_inappwebview: ^6.0.0
+  flutter_riverpod: ^2.5.1
   google_fonts: ^6.2.1
   iconsax: ^0.0.8
   iconsax_plus: ^1.0.0
@@ -41,11 +45,9 @@ dependencies:
   supabase: ^2.2.4
   supabase_flutter: ^2.5.8
   url_launcher: ^6.3.0
-  connectivity_plus: ^6.0.3
-  flutter_riverpod: ^2.5.1
-  external_app_launcher: ^4.0.0
+  webview_flutter: ^4.8.0
   youtube_player_flutter: ^9.0.1
-  flutter_inappwebview: ^6.0.0
+  flutter_otp_text_field: ^1.1.3+2
 
 dev_dependencies:
   flutter_lints: ^3.0.0
