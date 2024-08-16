@@ -15,6 +15,7 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  // creating a variable to store the OTP
   String otp = '';
   @override
   Widget build(BuildContext context) {
@@ -52,6 +53,7 @@ class _OtpScreenState extends State<OtpScreen> {
               const SizedBox(
                 height: 20,
               ),
+              //otp text field
               OtpTextField(
                 numberOfFields: 6,
                 borderColor: Color(0xFF380F43),
@@ -68,14 +70,17 @@ class _OtpScreenState extends State<OtpScreen> {
               const SizedBox(
                 height: 40,
               ),
+              //Resend OTP button
               InkWell(
                 onTap: ()async{
                   final response = await Supabase.instance.client.auth.resend(type: OtpType.signup, email: getCurrentUserEmail());
+                  //if OTP is not sent, show error message
                   if(response.messageId==null){
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text('Error in sending OTP. Try again later'),
                     ));
                   }
+                  //else show success message
                   else{
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text('OTP sent successfully'),
@@ -88,6 +93,7 @@ class _OtpScreenState extends State<OtpScreen> {
               const SizedBox(
                 height: 20,
               ),
+              //verify button
               SizedBox(
                 width: 367,
                 height: 63,
@@ -103,12 +109,14 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                   onPressed: () async{
                     final response = await Supabase.instance.client.auth.verifyOTP(type: OtpType.signup, token: otp, email: getCurrentUserEmail());
+                    // on verification success, navigate to the home screen
                     if(response.session!=null){
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => const BottomNav()),
                       );
                     }
+                    //else show error message
                     else{
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text('Error: Check the OTP and try again'),
