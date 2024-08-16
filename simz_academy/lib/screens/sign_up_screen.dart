@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/screens/forgot_password.dart';
+import 'package:simz_academy/screens/otp_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -214,8 +215,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         );
                         sm.showSnackBar(SnackBar(
                           content:
-                              Text('Signed Up: ${authResponse.user!.email!}'),
+                              Text('Verify your account using OTP that has sent to :  ${authResponse.user!.email!}'),
                         ));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                          return const OtpScreen();
+                        }));
                       }
                     } catch (error) {
                       sm.showSnackBar(SnackBar(
