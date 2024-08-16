@@ -6,7 +6,7 @@ import 'package:simz_academy/constants/supabase_functions.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:simz_academy/screens/forgot_password.dart';
 import 'package:simz_academy/screens/sign_up_screen.dart';
-import 'package:simz_academy/screens/splash_screen.dart';
+//import 'package:simz_academy/screens/splash_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -147,12 +147,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         context,
                         emailController,
                         _passwordController,);
-                    print(emailController.text);
-                    print(_passwordController.text);
-                    print(condition.length);
-                    print(condition);
-                    if (condition.length == 0) {
-                      print("Entered IF condition");
+                    //print(emailController.text);
+                    //print(_passwordController.text);
+                    //print(condition.length);
+                    //print(condition);
+                    if (condition.isEmpty) {
+                      //print("Entered IF condition");
                       try {
                         final authResponse = await supabase.auth.signInWithPassword(
                           email: emailController.text,

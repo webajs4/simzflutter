@@ -1,5 +1,7 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
-import 'package:simz_academy/screens/bottom_nav.dart';
+//import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:simz_academy/screens/redirect_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -56,8 +58,8 @@ Future<void> SignUp(BuildContext context,
     String mobile,
     String username) async {
   final supabase = Supabase.instance.client;
-  final user = supabase.auth.currentUser;
-  print('$email, $password, $mobile, $username');
+  //final user = supabase.auth.currentUser;
+  //print('$email, $password, $mobile, $username');
   final sm = ScaffoldMessenger.of(context);
   try {
     await supabase.auth.signUp(
@@ -68,7 +70,7 @@ Future<void> SignUp(BuildContext context,
     );
     } catch (error) {
     sm.showSnackBar(SnackBar(content: Text('Error: $error')));
-    print(error);
+    //print(error);
   }
 }
 
