@@ -17,6 +17,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool submitted = false;
   TextEditingController emailController =
       TextEditingController(); // emailController variable
   final TextEditingController _passwordController =
@@ -142,6 +143,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () async {
+                    setState(() {
+                      submitted = true;
+                    });
                     final sm = ScaffoldMessenger.of(context);
                     List condition = LoginValidator(
                         context,
@@ -187,8 +191,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child: HomeUiHelper().customText(
-                      'Login', 24, FontWeight.w700, Color(0xFFECD7F7)),
+                  child: (submitted)?CircularProgressIndicator():HomeUiHelper().customText(
+                      'Login', 20, FontWeight.w600, Color(0xFFFFFFFF)),
                 ),
 
                 //Navigate to Sign up

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/screens/forgot_password.dart';
 import 'package:simz_academy/screens/otp_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -19,6 +20,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _userNameController = TextEditingController();
   bool isPasswordVisible = false;
   final supabase = Supabase.instance.client;
+  bool submitted = false;
 
   @override
   Widget build(BuildContext context) {
@@ -174,6 +176,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 // Sign-up button
                 ElevatedButton(
                   onPressed: () async {
+                    setState(() {
+                      submitted = true;
+                    });
                     final sm = ScaffoldMessenger.of(context);
 
                     bool isEmailValid(String email) {
@@ -214,16 +219,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         );
                         sm.showSnackBar(SnackBar(
-                          content:
-                              Text('Verify your account using OTP that has sent to :  ${authResponse.user!.email!}'),
+                          content: Text(
+                              'Verify your account using OTP that has sent to :  ${authResponse.user!.email!}'),
                         ));
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
                           return const OtpScreen();
                         }));
                       }
                     } catch (error) {
-                      sm.showSnackBar(SnackBar(
-                          content: Text('Error signing up: $error')));
+                      sm.showSnackBar(
+                          SnackBar(content: Text('Error signing up: $error')));
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -235,14 +241,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      color: const Color(0xFFECD7F7),
-                    ),
-                  ),
+                  child: (submitted)
+                      ? const CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Color(0xFFECD7F7)),
+                        )
+                      : HomeUiHelper().customText(
+                          'Sign Up',
+                          24,
+                          FontWeight.w700,
+                          Color(0xFFECD7F7),
+                        ),
                 ),
 
                 const SizedBox(height: 25),
