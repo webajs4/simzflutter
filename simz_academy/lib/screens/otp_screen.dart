@@ -17,6 +17,7 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   // creating a variable to store the OTP
   String otp = '';
+  bool submitted = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,6 +74,9 @@ class _OtpScreenState extends State<OtpScreen> {
               //Resend OTP button
               InkWell(
                 onTap: ()async{
+                  setState(() {
+                    submitted=false;
+                  });
                   final response = await Supabase.instance.client.auth.resend(type: OtpType.signup, email: getCurrentUserEmail());
                   //if OTP is not sent, show error message
                   if(response.messageId==null){
@@ -108,6 +112,9 @@ class _OtpScreenState extends State<OtpScreen> {
                     ),
                   ),
                   onPressed: () async{
+                    setState(() {
+                      submitted = true;
+                    });
                     final response = await Supabase.instance.client.auth.verifyOTP(type: OtpType.signup, token: otp, email: getCurrentUserEmail());
                     // on verification success, navigate to the home screen
                     if(response.session!=null){
@@ -123,12 +130,8 @@ class _OtpScreenState extends State<OtpScreen> {
                       ));
                     }
                   },
-                  child: HomeUiHelper().customText(
-                    'Verify',
-                    24,
-                    FontWeight.w700,
-                    Color(0xFFECD7F7),
-                  ),
+                  child: (submitted)?CircularProgressIndicator():HomeUiHelper().customText(
+                      'Verify', 24, FontWeight.w600, Color(0xFFECD7F7)),
                 ),
               ),
             ],
