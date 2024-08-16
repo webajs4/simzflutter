@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:simz_academy/constants/supabase_functions.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:simz_academy/screens/forgot_password.dart';
+import 'package:simz_academy/screens/redirect_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -202,7 +204,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       print(_passwordController.text);
                       print(_phoneNumberController.text);
                       print(_userNameController.text);
-                      
                       final authResponse = await supabase.auth.signUp(
                         email: emailController.text,
                         password: _passwordController.text,
@@ -216,10 +217,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         content:
                             Text('Logged In: ${authResponse.user!.email!}'),
                       ));
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) {
-                        return BottomNav();
-                      }));
+                      }
+                      catch (error) {
+                        sm.showSnackBar(SnackBar(content: Text('Error: $error')));
+                        print(error);
+                      }
+                    } else {
+                      sm.showSnackBar(SnackBar(
+                        content: Text('Please Correct the following mistakes: \n${condition.toString().replaceAll('[', '').replaceAll(']', '').replaceAll(', ', '\n')}'),
+                      ));
                     }
                   },
                   style: ElevatedButton.styleFrom(

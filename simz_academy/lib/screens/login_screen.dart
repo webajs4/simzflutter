@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:simz_academy/constants/supabase_functions.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:simz_academy/screens/forgot_password.dart';
 import 'package:simz_academy/screens/sign_up_screen.dart';
+import 'package:simz_academy/screens/splash_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -140,25 +142,40 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () async {
-                    try {
-                      final response = await Supabase.instance.client.auth
-                          .signInWithPassword(
-                        email: emailController.text,
-                        password: _passwordController.text,
-                      );
+                    final sm = ScaffoldMessenger.of(context);
+                    List condition = LoginValidator(
+                        context,
+                        emailController,
+                        _passwordController,);
+                    print(emailController.text);
+                    print(_passwordController.text);
+                    print(condition.length);
+                    print(condition);
+                    if (condition.length == 0) {
+                      print("Entered IF condition");
+                      try {
+                        final authResponse = await supabase.auth.signInWithPassword(
+                          email: emailController.text,
+                          password: _passwordController.text,
+                        );
+                      sm.showSnackBar(SnackBar(
+                        content:
+                            Text('Logged In: ${authResponse.user!.email!}'),
+                      ));
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) {
+                        return BottomNav();
 
-                      // Check if session is not null, meaning login was successful
-                      if (response.session != null) {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => BottomNav()));
-                      } else {
-                        // Handle error (e.g., invalid credentials)
-                        print(
-                            'Error: Invalid credentials or something went wrong.');
+                      }));
                       }
-                    } catch (e) {
-                      // Handle exception (network issues, etc.)
-                      print('Error: $e');
+                      catch (error) {
+                        sm.showSnackBar(SnackBar(content: Text('Error: $error')));
+                        print(error);
+                      }
+                    } else {
+                      sm.showSnackBar(SnackBar(
+                        content: Text('Please Correct the following mistakes: \n${condition.toString().replaceAll('[', '').replaceAll(']', '').replaceAll(', ', '\n')}'),
+                      ));
                     }
                   },
                   style: ElevatedButton.styleFrom(
