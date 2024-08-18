@@ -16,7 +16,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: Icon(Iconsax.logout),
+            icon: Icon(Iconsax.logout, color: Color.fromRGBO(56, 15, 67, 1)),
             onPressed: (){
               Supabase.instance.client.auth.signOut();
               Navigator.of(context).pushReplacement(MaterialPageRoute(
