@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart'; // Ensure you have the iconsax package ad
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/constants/supabase_functions.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
+import 'package:simz_academy/screens/login_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart'; // Ensure this path is correct
 
 class ProfileScreen extends StatelessWidget {
@@ -13,6 +14,17 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Iconsax.logout, color: Color.fromRGBO(56, 15, 67, 1)),
+            onPressed: (){
+              Supabase.instance.client.auth.signOut();
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => LoginScreen(),
+              ));
+            },
+          )
+        ],
         leading: IconButton(
           icon: Icon(Iconsax.arrow_square_left),
           color: Color.fromRGBO(56, 15, 67, 1),
