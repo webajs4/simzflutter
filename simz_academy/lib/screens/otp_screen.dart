@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
-import 'package:simz_academy/constants/supabase_functions.dart';
+//import 'package:simz_academy/constants/supabase_functions.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -78,7 +78,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   setState(() {
                     submitted=false;
                   });
-                  final response = await Supabase.instance.client.auth.resend(type: OtpType.signup, email: getCurrentUserEmail());
+                  final response = await Supabase.instance.client.auth.resend(type: OtpType.signup, email: widget.email.toString());
                   //if OTP is not sent, show error message
                   if(response.messageId==null){
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

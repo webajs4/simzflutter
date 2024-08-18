@@ -21,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    //print(getCurrentUserName());
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10.0),

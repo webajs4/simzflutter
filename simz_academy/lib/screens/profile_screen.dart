@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart'; // Ensure you have the iconsax package added in pubspec.yaml
-import 'package:simz_academy/UIHelper/home_ui_helper.dart'; // Ensure this path is correct
+import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:simz_academy/constants/supabase_functions.dart';
+import 'package:supabase_flutter/supabase_flutter.dart'; // Ensure this path is correct
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -18,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         title: Center(
           child: HomeUiHelper().customText(
-            'Sheets',
+            'Profile',
             24,
             FontWeight.w400,
             Color.fromRGBO(56, 15, 67, 1),
@@ -68,26 +71,37 @@ class ProfileScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          HomeUiHelper().customText(
-                            'Alan Jose Santo',
-                            32,
-                            FontWeight.w600,
-                            Color.fromRGBO(251, 246, 253, 1),
+                          SizedBox(
+                            width: 200.0,
+                            child: HomeUiHelper().customText(
+                              getCurrentUserName(),
+                              32,
+                              FontWeight.w600,
+                              Color.fromRGBO(251, 246, 253, 1),
+                            ),
+                          ),
+
+                          SizedBox(
+                            width: 200.0,
+                            child: Text(
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              getCurrentUserId(context),
+                              style: GoogleFonts.blinker( 
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: Color.fromRGBO(251, 246, 253, 1),
+                              ),
+                            ),
                           ),
                           HomeUiHelper().customText(
-                            'simzacademy829347',
+                            getCurrentUserEmail(),
                             16,
                             FontWeight.w400,
                             Color.fromRGBO(251, 246, 253, 1),
                           ),
                           HomeUiHelper().customText(
-                            'abc@test.com',
-                            16,
-                            FontWeight.w400,
-                            Color.fromRGBO(251, 246, 253, 1),
-                          ),
-                          HomeUiHelper().customText(
-                            '28349242902',
+                            getCurrentUserPhone(),
                             16,
                             FontWeight.w400,
                             Color.fromRGBO(251, 246, 253, 1),
@@ -110,43 +124,54 @@ class ProfileScreen extends StatelessWidget {
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (context, index) {
-                          return Container(
-                            margin: EdgeInsets.only(right: 16.0),
-                            width: 425.0,
-                            height: 200.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16.0),
-                              color: Color.fromRGBO(196, 220, 243, 1),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: 300.0,
-                                        child: Text(
-                                          'Scales and Theory of KeyBoard',
-                                          style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.w600,
-                                            color: Color.fromRGBO(27, 60, 95, 1),
+                          return SizedBox(
+                            width: 363.0,
+                            child: Container(
+                              margin: EdgeInsets.only(right: 16.0),
+                              width: 412.0,
+                              height: 200.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16.0),
+                                color: Color.fromRGBO(196, 220, 243, 1),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          width: 230.0,
+                                          child: Text(
+                                            'Scales and Theory of KeyBoard',
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.w600,
+                                              color:
+                                                  Color.fromRGBO(27, 60, 95, 1),
+                                            ),
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                      ),
-                                      HomeUiHelper().customText('12 Lessons', 20, FontWeight.w300, Color.fromRGBO(27, 60, 95, 1)),
-                                    ],
+                                        HomeUiHelper().customText(
+                                            '12 Lessons',
+                                            20,
+                                            FontWeight.w300,
+                                            Color.fromRGBO(27, 60, 95, 1)),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Image.asset('lib/assets/images/sheets.png',
-                                    width: 100.0, height: 100.0,
-                                ),
-                              ],
+                                  Image.asset(
+                                    'lib/assets/images/sheets.png',
+                                    width: 100.0,
+                                    height: 100.0,
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },
@@ -161,5 +186,12 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String getCurrentUserPhone() {
+    final supabase = Supabase.instance.client;
+    final user = supabase.auth.currentUser?.userMetadata!['phone'];
+    //print(user);
+    return user ?? 'No phone number found';
   }
 }
