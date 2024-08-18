@@ -6,6 +6,7 @@ class HomeUiHelper {
       String content, double fontSize, FontWeight fontWeight, Color color) {
     return Text(
       maxLines: 3,
+      overflow: TextOverflow.ellipsis,
       content,
       style: GoogleFonts.blinker(
         fontSize: fontSize,
