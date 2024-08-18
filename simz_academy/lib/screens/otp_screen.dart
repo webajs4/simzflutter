@@ -8,7 +8,8 @@ import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key});
+  final email;
+  const OtpScreen({super.key, required this.email});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -116,7 +117,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       submitted = true;
                     });
                     try{
-                      final response = await Supabase.instance.client.auth.verifyOTP(type: OtpType.email , token: otp, email: getCurrentUserEmail());
+                      final response = await Supabase.instance.client.auth.verifyOTP(type: OtpType.email , token: otp, email: widget.email.toString());
                     // on verification success, navigate to the home screen
                     if(response.session!=null){
                       Navigator.pushReplacement(

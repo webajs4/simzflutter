@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
-import 'package:simz_academy/constants/supabase_functions.dart';
-import 'package:simz_academy/screens/forgot_password.dart';
+//import 'package:simz_academy/constants/supabase_functions.dart';
+//import 'package:simz_academy/screens/forgot_password.dart';
 import 'package:simz_academy/screens/otp_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -19,6 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   bool isPasswordVisible = false;
   final supabase = Supabase.instance.client;
   bool submitted = false;
@@ -78,11 +79,44 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
+                      borderSide: BorderSide(
+                        color: const Color(0xFF380F43),
+                      ),
                     ),
+                  )
+                ),
+
+                const SizedBox(height: 10),
+
+                //Username section
+                Text(
+                  'Full Name',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF380F43),
                   ),
                 ),
 
+                //user name textfield
+                const SizedBox(height: 5),
+                TextField(
+                  controller: _userNameController,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: const Color(0xFFECD7F7),
+                    hintText: 'Enter your full name',
+                    hintStyle: const TextStyle(
+                      color: Color.fromARGB(255, 209, 190, 219),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: const Color(0xFF380F43),
+                      ),
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 10),
 
                 // Phone Number section
@@ -106,7 +140,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
+                      borderSide: BorderSide(
+                        color: const Color(0xFF380F43),
+                      ),
                     ),
                   ),
                 ),
@@ -145,27 +181,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 10),
-
-                // Forgot password
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const ForgotPasswordScreen(),
-                      ));
-                    },
-                    child: Text(
-                      'Forgot Password?',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                      borderSide: BorderSide(
                         color: const Color(0xFF380F43),
                       ),
                     ),
@@ -173,6 +189,48 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
 
                 const SizedBox(height: 10),
+
+                //confirm password section
+                Text(
+                  'Confirm Password',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF380F43),
+                  ),
+                ),
+
+                const SizedBox(height: 5),
+                TextField(
+                  controller: _confirmPasswordController,
+                  obscureText: !isPasswordVisible,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isPasswordVisible = !isPasswordVisible;
+                        });
+                      },
+                      icon: isPasswordVisible
+                          ? const Icon(Iconsax.eye)
+                          : const Icon(Iconsax.eye_slash),
+                    ),
+                    filled: true,
+                    fillColor: const Color(0xFFECD7F7),
+                    hintText: 'Confirm your Password',
+                    hintStyle: const TextStyle(
+                      color: Color.fromARGB(255, 209, 190, 219),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: const Color(0xFF380F43),
+                      ),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 40),
 
                 // Sign-up button
                 ElevatedButton(
@@ -210,6 +268,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           content: Text(
                               'Password must contain at least one special character'),
                         ));
+                      } else if (_passwordController.text !=
+                          _confirmPasswordController.text) {
+                        sm.showSnackBar(const SnackBar(content: Text('Password does not match'),));
                       } else {
                         final authResponse = await supabase.auth.signUp(
                           email: emailController.text,
@@ -225,7 +286,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ));
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
-                          return const OtpScreen();
+                          return  OtpScreen(email: emailController.text);
                         }));
                       }
                     } catch (error) {
