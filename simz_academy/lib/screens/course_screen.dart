@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:simz_academy/UIHelper/course_ui_helper.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:simz_academy/widgets/common_widgets.dart';
 import 'package:simz_academy/widgets/course_screen_widgets.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -22,43 +24,56 @@ class _MyCoursesState extends State<CourseScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Iconsax.arrow_square_left),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context){
+              return const BottomNav();
+            }));
+          },
+        ),
         actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Stack(
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(236, 215, 247, 1),
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: const Icon(
-                      IconsaxPlusLinear.notification,
-                      color: Color.fromRGBO(56, 15, 67, 1.0),
-                    ),
-                  ),
-                  Positioned(
-                    top: 2,
-                    right: 2,
-                    child: Container(
-                      width: 13,
-                      height: 13,
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Stack(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
                       decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: const Color.fromRGBO(236, 215, 247, 1),
                         borderRadius: BorderRadius.circular(25),
                       ),
+                      child: const Icon(
+                        IconsaxPlusLinear.notification,
+                        color: Color.fromRGBO(56, 15, 67, 1.0),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    Positioned(
+                      top: 2,
+                      right: 2,
+                      child: Container(
+                        width: 13,
+                        height: 13,
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
-        title: CourseUiHelper().customText(
-            'Courses', 24, FontWeight.w600, Color.fromRGBO(56, 15, 67, 1)),
+        title: Center(
+          child: CourseUiHelper().customText(
+              'Courses', 24, FontWeight.w600, Color.fromRGBO(56, 15, 67, 1)),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
