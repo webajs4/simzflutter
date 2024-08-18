@@ -115,7 +115,8 @@ class _OtpScreenState extends State<OtpScreen> {
                     setState(() {
                       submitted = true;
                     });
-                    final response = await Supabase.instance.client.auth.verifyOTP(type: OtpType.signup, token: otp, email: getCurrentUserEmail());
+                    try{
+                      final response = await Supabase.instance.client.auth.verifyOTP(type: OtpType.email , token: otp, email: getCurrentUserEmail());
                     // on verification success, navigate to the home screen
                     if(response.session!=null){
                       Navigator.pushReplacement(
@@ -128,6 +129,9 @@ class _OtpScreenState extends State<OtpScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text('Error: Check the OTP and try again'),
                       ));
+                    }}
+                    catch(e){
+                      print(e);
                     }
                   },
                   child: (submitted)?CircularProgressIndicator():HomeUiHelper().customText(

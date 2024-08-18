@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const Color.fromRGBO(56, 15, 67, 1.0),
                               ),
                               HomeUiHelper().customText(
-                                getCurrentUserId(context),
+                                getCurrentUserName(),
                                 24,
                                 FontWeight.w600,
                                 const Color.fromRGBO(56, 15, 67, 1.0),
