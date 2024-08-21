@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CourseDetails extends StatefulWidget {
   final String course_id;
@@ -22,6 +23,8 @@ class CourseDetails extends StatefulWidget {
 class _CourseDetailsState extends State<CourseDetails> {
   @override
   Widget build(BuildContext context)  {
+    
+    getDetails();
     
     return Scaffold(
       body: Column(
@@ -140,6 +143,17 @@ class _CourseDetailsState extends State<CourseDetails> {
         ],
       ),
     );
+  }
+  
+  Future<void> getDetails() async{
+    // get course details
+    final response = await Supabase.instance.client
+        .from('course_details')
+        .select('*')
+        .eq('course_id', widget.course_id);
+        for(int i=0;i<response.length;i++){
+          print("${i+1} ${response[i]['lessons']}");
+        }
   }
 }
 
