@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
@@ -152,7 +154,7 @@ class _CourseDetailsState extends State<CourseDetails> {
         .select('*')
         .eq('course_id', widget.course_id);
         for(int i=0;i<response.length;i++){
-          print("${i+1} ${response[i]['lessons']}");
+          log("${i+1} ${response[i]['lessons']}");
         }
   }
 }
