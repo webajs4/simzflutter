@@ -17,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Iconsax.logout, color: Color.fromRGBO(56, 15, 67, 1)),
-            onPressed: (){
+            onPressed: () {
               Supabase.instance.client.auth.signOut();
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                 builder: (context) => LoginScreen(),
@@ -46,157 +46,319 @@ class ProfileScreen extends StatelessWidget {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HomeUiHelper().customText(
-                'Student details',
-                20,
-                FontWeight.w600,
-                Color.fromRGBO(56, 15, 67, 1),
-              ),
-              SizedBox(height: 16.0),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.0),
-                  color: Colors.white,
-                  gradient: RadialGradient(
-                    colors: const [
-                      Color.fromRGBO(56, 15, 67, 1),
-                      Color.fromRGBO(91, 40, 103, 1),
-                    ],
-                    radius: 0.8,
-                  ),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                HomeUiHelper().customText(
+                  'Student details',
+                  20,
+                  FontWeight.w600,
+                  Color.fromRGBO(56, 15, 67, 1),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 80.0,
-                        width: 80.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: AssetImage('lib/assets/images/person.png'),
-                            fit: BoxFit.cover,
+                SizedBox(height: 16.0),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                    color: Colors.white,
+                    gradient: RadialGradient(
+                      colors: const [
+                        Color.fromRGBO(56, 15, 67, 1),
+                        Color.fromRGBO(91, 40, 103, 1),
+                      ],
+                      radius: 0.8,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 80.0,
+                          width: 80.0,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: AssetImage('lib/assets/images/person.png'),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 200.0,
-                            child: HomeUiHelper().customText(
-                              getCurrentUserName(),
-                              32,
-                              FontWeight.w600,
-                              Color.fromRGBO(251, 246, 253, 1),
-                            ),
-                          ),
-
-                          SizedBox(
-                            width: 200.0,
-                            child: Text(
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              getCurrentUserId(context),
-                              style: GoogleFonts.blinker( 
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: Color.fromRGBO(251, 246, 253, 1),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 200.0,
+                              child: HomeUiHelper().customText(
+                                getCurrentUserName(),
+                                32,
+                                FontWeight.w600,
+                                Color.fromRGBO(251, 246, 253, 1),
                               ),
                             ),
-                          ),
-                          HomeUiHelper().customText(
-                            getCurrentUserEmail(),
-                            16,
-                            FontWeight.w400,
-                            Color.fromRGBO(251, 246, 253, 1),
-                          ),
-                          HomeUiHelper().customText(
-                            getCurrentUserPhone(),
-                            16,
-                            FontWeight.w400,
-                            Color.fromRGBO(251, 246, 253, 1),
+                            SizedBox(
+                              width: 200.0,
+                              child: Text(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                getCurrentUserId(context),
+                                style: GoogleFonts.blinker(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color.fromRGBO(251, 246, 253, 1),
+                                ),
+                              ),
+                            ),
+                            HomeUiHelper().customText(
+                              getCurrentUserEmail(),
+                              16,
+                              FontWeight.w400,
+                              Color.fromRGBO(251, 246, 253, 1),
+                            ),
+                            HomeUiHelper().customText(
+                              getCurrentUserPhone(),
+                              16,
+                              FontWeight.w400,
+                              Color.fromRGBO(251, 246, 253, 1),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16.0),
+                HomeUiHelper().customText("Your Courses", 20, FontWeight.w600,
+                    Color.fromRGBO(56, 15, 67, 1)),
+                SizedBox(height: 16.0),
+                SizedBox(
+                  height:
+                      120.0, // Specify a fixed height for the CustomScrollView
+                  child: CustomScrollView(
+                    scrollDirection: Axis.horizontal,
+                    slivers: [
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            return SizedBox(
+                              width: 363.0,
+                              child: Container(
+                                margin: EdgeInsets.only(right: 16.0),
+                                width: 412.0,
+                                height: 200.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                  color: Color.fromRGBO(196, 220, 243, 1),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: 230.0,
+                                            child: Text(
+                                              'Scales and Theory of KeyBoard',
+                                              style: TextStyle(
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.w600,
+                                                color: Color.fromRGBO(
+                                                    27, 60, 95, 1),
+                                              ),
+                                              maxLines: 3,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                          HomeUiHelper().customText(
+                                              '12 Lessons',
+                                              20,
+                                              FontWeight.w300,
+                                              Color.fromRGBO(27, 60, 95, 1)),
+                                        ],
+                                      ),
+                                    ),
+                                    Image.asset(
+                                      'lib/assets/images/sheets.png',
+                                      width: 100.0,
+                                      height: 100.0,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          childCount: 3,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+// Badges gained section below  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+                SizedBox(height: 16.0),
+                HomeUiHelper().customText("Badges Gained", 20, FontWeight.w600,
+                    Color.fromRGBO(56, 15, 67, 1)),
+                SizedBox(height: 16.0),
+                Container(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              // Do something when the user taps on the badge
+                            },
+                            child: Column(
+                              children: [
+                                Image(
+                                  image:
+                                      AssetImage('lib/assets/images/award.png'),
+                                  width: 100.0,
+                                  height: 100.0,
+                                ),
+                                Text(
+                                  'Amethyst \nApprentice',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromRGBO(27, 60, 95, 1),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
+                      SizedBox(height: 16.0),
                     ],
                   ),
                 ),
-              ),
-              SizedBox(height: 16.0),
-              HomeUiHelper().customText("Your Courses", 20, FontWeight.w600,
-                  Color.fromRGBO(56, 15, 67, 1)),
-              SizedBox(
-                height:
-                    120.0, // Specify a fixed height for the CustomScrollView
-                child: CustomScrollView(
-                  scrollDirection: Axis.horizontal,
-                  slivers: [
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          return SizedBox(
-                            width: 363.0,
-                            child: Container(
-                              margin: EdgeInsets.only(right: 16.0),
-                              width: 412.0,
-                              height: 200.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16.0),
-                                color: Color.fromRGBO(196, 220, 243, 1),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          width: 230.0,
-                                          child: Text(
-                                            'Scales and Theory of KeyBoard',
-                                            style: TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.w600,
-                                              color:
-                                                  Color.fromRGBO(27, 60, 95, 1),
-                                            ),
-                                            maxLines: 3,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        HomeUiHelper().customText(
-                                            '12 Lessons',
-                                            20,
-                                            FontWeight.w300,
-                                            Color.fromRGBO(27, 60, 95, 1)),
-                                      ],
-                                    ),
+
+// Badges gained section above  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// Certificates earned section below  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+                SizedBox(height: 16.0),
+                HomeUiHelper().customText("Certificates Earned", 20,
+                    FontWeight.w600, Color.fromRGBO(56, 15, 67, 1)),
+                SizedBox(height: 16.0),
+                Container(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              // Do something when the user taps on the badge
+                            },
+                            child: Column(
+                              children: [
+                                Image(
+                                  image:
+                                      AssetImage('lib/assets/images/award.png'),
+                                  width: 100.0,
+                                  height: 100.0,
+                                ),
+                                Text(
+                                  'Amethyst \nApprentice',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromRGBO(27, 60, 95, 1),
                                   ),
-                                  Image.asset(
-                                    'lib/assets/images/sheets.png',
-                                    width: 100.0,
-                                    height: 100.0,
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          );
-                        },
-                        childCount: 3,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              // Do something when the user taps on the badge
+                            },
+                            child: Column(
+                              children: [
+                                Image(
+                                  image:
+                                      AssetImage('lib/assets/images/award.png'),
+                                  width: 100.0,
+                                  height: 100.0,
+                                ),
+                                Text(
+                                  'Amethyst \nApprentice',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromRGBO(27, 60, 95, 1),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              // Do something when the user taps on the badge
+                            },
+                            child: Column(
+                              children: [
+                                Image(
+                                  image:
+                                      AssetImage('lib/assets/images/award.png'),
+                                  width: 100.0,
+                                  height: 100.0,
+                                ),
+                                Text(
+                                  'Amethyst \nApprentice',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromRGBO(27, 60, 95, 1),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 32.0),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+
+// Certificates earned section above  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// instant support and connected with us section below  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+                SizedBox(height: 16.0),
+                Center(
+                  child: HomeUiHelper().customText(
+                      "        Get instant support from our team ! \nChat with instructors anytime, anywhere !",
+                      14,
+                      FontWeight.w600,
+                      Color.fromRGBO(56, 15, 67, 1)),
+                ),
+                SizedBox(height: 32.0),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                    color: Colors.red[200]
+                  ),
+                  child: HomeUiHelper().customText(
+                      "        Stay connected with us !",
+                      14,
+                      FontWeight.w600,
+                      Color.fromRGBO(56, 15, 67, 1)),
+                ),
+
+              ],
+            ),
           ),
         ),
       ),

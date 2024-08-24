@@ -90,10 +90,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                          Image.asset(
-                            'lib/assets/images/person.png',
-                            fit: BoxFit.cover,
-                            scale: 1.1,
+                          Padding(
+                            padding: const EdgeInsets.only(right:12.0),
+                            child: Image.asset(
+                              'lib/assets/images/person.png',
+                              fit: BoxFit.cover,
+                              scale: 1.1,
+                            ),
                           ),
                         ],
                       ),
