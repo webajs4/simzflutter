@@ -1,12 +1,13 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:simz_academy/screens/bottom_nav.dart';
 //import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:simz_academy/screens/login_screen.dart';
 import 'package:simz_academy/screens/no_internet.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 // ignore: must_be_immutable
 class SplashScreen extends StatelessWidget {
-
   SplashScreen({super.key});
 
   bool networkState = false;
@@ -17,13 +18,19 @@ class SplashScreen extends StatelessWidget {
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        if (networkState==true) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const LoginScreen()),
-          );
-        }
-        else{
+        if (networkState == true) {
+          if (!checkUserSignIn()) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+            );
+          } else {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const BottomNav()),
+            );
+          }
+        } else {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const NoInternet()),
@@ -67,5 +74,14 @@ class SplashScreen extends StatelessWidget {
       networkState = false;
     }
     //print(networkState);
+  }
+
+  bool checkUserSignIn() {
+    final Session? session = Supabase.instance.client.auth.currentSession;
+    if (session == null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
