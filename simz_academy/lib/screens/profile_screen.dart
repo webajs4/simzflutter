@@ -5,10 +5,36 @@ import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/constants/supabase_functions.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:simz_academy/screens/login_screen.dart';
-import 'package:supabase_flutter/supabase_flutter.dart'; // Ensure this path is correct
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  void _launchURL(Uri uri, bool inApp) async {
+    try {
+      if (await canLaunchUrl(uri)) {
+        if (inApp) {
+          await launchUrl(
+            uri,
+            mode: LaunchMode.inAppWebView,
+          );
+        } else {
+          await launchUrl(
+            uri,
+            mode: LaunchMode.externalApplication,
+          );
+        }
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +44,53 @@ class ProfileScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Iconsax.logout, color: Color.fromRGBO(56, 15, 67, 1)),
             onPressed: () {
-              Supabase.instance.client.auth.signOut();
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => LoginScreen(),
-              ));
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    content: HomeUiHelper().customText(
+                      "Are you sure want to logout?",
+                      26,
+                      FontWeight.w600,
+                      Color.fromRGBO(56, 15, 67, 1),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: HomeUiHelper().customText(
+                          "Cancel",
+                          20,
+                          FontWeight.w400,
+                          Color.fromRGBO(56, 15, 67, 1),
+                        ),
+                      ),
+                      TextButton(
+                        style: ButtonStyle(
+                          backgroundColor: WidgetStateProperty.all<Color>(
+                              Color.fromRGBO(56, 15, 67, 1)),
+                          foregroundColor: WidgetStateProperty.all<Color>(
+                              Color.fromRGBO(251, 246, 253, 1)),
+                        ),
+                        onPressed: () {
+                          Supabase.instance.client.auth.signOut();
+                          Navigator.of(context)
+                              .pushReplacement(MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ));
+                        },
+                        child: HomeUiHelper().customText(
+                          "Logout",
+                          20,
+                          FontWeight.w400,
+                          Color.fromRGBO(255,255,255, 1),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
           )
         ],
@@ -218,7 +287,7 @@ class ProfileScreen extends StatelessWidget {
                               // Do something when the user taps on the badge
                             },
                             child: Column(
-                              children: [
+                              children: const [
                                 Image(
                                   image:
                                       AssetImage('lib/assets/images/award.png'),
@@ -262,10 +331,10 @@ class ProfileScreen extends StatelessWidget {
                               // Do something when the user taps on the badge
                             },
                             child: Column(
-                              children: [
+                              children: const [
                                 Image(
-                                  image:
-                                      AssetImage('lib/assets/images/document-download.png'),
+                                  image: AssetImage(
+                                      'lib/assets/images/document-download.png'),
                                   width: 100.0,
                                   height: 100.0,
                                 ),
@@ -291,10 +360,10 @@ class ProfileScreen extends StatelessWidget {
                               // Do something when the user taps on the badge
                             },
                             child: Column(
-                              children: [
+                              children: const [
                                 Image(
-                                  image:
-                                      AssetImage('lib/assets/images/document-download.png'),
+                                  image: AssetImage(
+                                      'lib/assets/images/document-download.png'),
                                   width: 100.0,
                                   height: 100.0,
                                 ),
@@ -320,10 +389,10 @@ class ProfileScreen extends StatelessWidget {
                               // Do something when the user taps on the badge
                             },
                             child: Column(
-                              children: [
+                              children: const [
                                 Image(
-                                  image:
-                                      AssetImage('lib/assets/images/document-download.png'),
+                                  image: AssetImage(
+                                      'lib/assets/images/document-download.png'),
                                   width: 100.0,
                                   height: 100.0,
                                 ),
@@ -366,54 +435,64 @@ class ProfileScreen extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   height: 115,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                        BoxShadow(
-                          blurStyle: BlurStyle.inner,
-                          color: Color.fromARGB(30, 0, 0, 6),
-                          spreadRadius: 0.75,
-                          blurRadius: 10,
-                          offset: Offset(0, 4),
-                        ),
-                      ],
-                    color: Color(0xFFF6EBFC)
-                  ),
+                  decoration: BoxDecoration(boxShadow: const [
+                    BoxShadow(
+                      blurStyle: BlurStyle.inner,
+                      color: Color.fromARGB(30, 0, 0, 6),
+                      spreadRadius: 0.75,
+                      blurRadius: 10,
+                      offset: Offset(0, 4),
+                    ),
+                  ], color: Color(0xFFF6EBFC)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      HomeUiHelper().customText(
-                          "Stay connected with us !",
-                          24,
-                          FontWeight.w600,
-                          Color(0xFF380F43)),
+                      HomeUiHelper().customText("Stay connected with us !", 24,
+                          FontWeight.w600, Color(0xFF380F43)),
                       SizedBox(height: 16.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           InkWell(
+                            onTap: () => _launchURL(
+                                Uri.parse(
+                                    'https://www.facebook.com/simzacademy/'),
+                                false),
                             child: Image(
-                              image: AssetImage('lib/assets/images/facebook.png'),
+                              image:
+                                  AssetImage('lib/assets/images/facebook.png'),
                               width: 50.0,
                               height: 50.0,
                             ),
                           ),
                           InkWell(
                             child: Image(
-                              image: AssetImage('lib/assets/images/discord.png'),
+                              image:
+                                  AssetImage('lib/assets/images/discord.png'),
                               width: 50.0,
                               height: 50.0,
                             ),
                           ),
                           InkWell(
+                            onTap: () => _launchURL(
+                                Uri.parse(
+                                    'https://www.instagram.com/simzacademy/'),
+                                false),
                             child: Image(
-                              image: AssetImage('lib/assets/images/instagram.png'),
+                              image:
+                                  AssetImage('lib/assets/images/instagram.png'),
                               width: 50.0,
                               height: 50.0,
                             ),
                           ),
                           InkWell(
+                            onTap: () => _launchURL(
+                                Uri.parse(
+                                    'https://api.whatsapp.com/send/?phone=917907386458&text=Hello+Simz+Academy%2C+I+would+like+to+know+more+about+your+courses.&type=phone_number&app_absent=0'),
+                                false),
                             child: Image(
-                              image: AssetImage('lib/assets/images/whatsapp.png'),
+                              image:
+                                  AssetImage('lib/assets/images/whatsapp.png'),
                               width: 50.0,
                               height: 50.0,
                             ),
@@ -423,7 +502,43 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 100.0),
+                SizedBox(height: 50.0),
+
+                //contact us section
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    HomeUiHelper().customText(
+                        'Contact Us', 20, FontWeight.w600, Color(0xFF380F43)),
+                    SizedBox(height: 10.0),
+                    InkWell(
+                        onTap: () =>
+                            _launchURL(Uri.parse('tel:+919072397378'), false),
+                        child: HomeUiHelper().customText(
+                            'Phone : +919072397378',
+                            16,
+                            FontWeight.w400,
+                            Color(0xFF380F43))), //phone
+                    InkWell(
+                        onTap: () => _launchURL(
+                            Uri.parse('mailto:simzzacademy@gmail.com'), false),
+                        child: HomeUiHelper().customText(
+                            'Email: simzzacademy@gmail.com',
+                            16,
+                            FontWeight.w400,
+                            Color(0xFF380F43))), //email
+                    HomeUiHelper().customText(
+                        'Address : 123 Learning Lane,\nKnowledge city',
+                        16,
+                        FontWeight.w400,
+                        Color(0xFF380F43)), //address
+                    HomeUiHelper().customText(
+                        'Working Hours : Mon-Fri: 9AM - 5PM',
+                        16,
+                        FontWeight.w400,
+                        Color(0xFF380F43)),
+                  ],
+                )
               ],
             ),
           ),
