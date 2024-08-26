@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:developer';
+//import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -170,7 +170,8 @@ class _CourseDetailsState extends State<CourseDetails> {
                 children: [
                   HomeUiHelper().customText('Lessons', 20, FontWeight.w600, Color(0xFF380F43)),
                   const SizedBox(height: 10),
-                  CourseDetailConsumer()
+                  SizedBox(height : 700,
+                  child: CourseDetailConsumer())
                 ],
               ),
             ),
@@ -181,18 +182,22 @@ class _CourseDetailsState extends State<CourseDetails> {
     );
   }
 
-  Future<int> getDetails(List courseDetailList) async{
-    // get course details
-    final response = await Supabase.instance.client
-        .from('course_details')
-        .select('*')
-        .eq('course_id', widget.course_id);
-    for(int i=0;i<response.length;i++){
-      log("${i+1} ${response[i]['lessons']}");
-      courseDetailList.add(response[i]['lessons']);
-    }
-    return courseDetailList.length;
+  Future<int> getDetails(List courseDetailList) async {
+  // Get course details
+  final response = await Supabase.instance.client
+      .from('course_details')
+      .select('*')
+      .eq('course_id', widget.course_id);
+
+  for (var detail in response) {
+    //print("${detail['id']} ${detail['lessons']}");
+    
+    // Assuming response is a map, add the whole map to the list
+    courseDetailList.add(detail);
   }
+  return courseDetailList.length;
+}
+
 }
 
 class CourseDetailsClipper extends CustomClipper<Path> {
