@@ -137,8 +137,11 @@ class _CourseDetailsState extends State<CourseDetails> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          HomeUiHelper().customText(widget.course_title, 32,
-                              FontWeight.w600, Color.fromRGBO(251, 246, 253, 1)),
+                          HomeUiHelper().customText(
+                              widget.course_title,
+                              32,
+                              FontWeight.w600,
+                              Color.fromRGBO(251, 246, 253, 1)),
                           const SizedBox(
                             width: 10,
                           ),
@@ -168,14 +171,18 @@ class _CourseDetailsState extends State<CourseDetails> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  HomeUiHelper().customText('Lessons', 20, FontWeight.w600, Color(0xFF380F43)),
+                  HomeUiHelper().customText(
+                      'Lessons', 20, FontWeight.w600, Color(0xFF380F43)),
                   const SizedBox(height: 10),
-                  SizedBox(height : 700,
-                  child: CourseDetailConsumer())
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxHeight: MediaQuery.of(context).size.height * 1.2,
+                    ),
+                    child: CourseDetailConsumer(),
+                  ),
                 ],
               ),
             ),
-        
           ],
         ),
       ),
@@ -183,21 +190,20 @@ class _CourseDetailsState extends State<CourseDetails> {
   }
 
   Future<int> getDetails(List courseDetailList) async {
-  // Get course details
-  final response = await Supabase.instance.client
-      .from('course_details')
-      .select('*')
-      .eq('course_id', widget.course_id);
+    // Get course details
+    final response = await Supabase.instance.client
+        .from('course_details')
+        .select('*')
+        .eq('course_id', widget.course_id);
 
-  for (var detail in response) {
-    //print("${detail['id']} ${detail['lessons']}");
-    
-    // Assuming response is a map, add the whole map to the list
-    courseDetailList.add(detail);
+    for (var detail in response) {
+      //print("${detail['id']} ${detail['lessons']}");
+
+      // Assuming response is a map, add the whole map to the list
+      courseDetailList.add(detail);
+    }
+    return courseDetailList.length;
   }
-  return courseDetailList.length;
-}
-
 }
 
 class CourseDetailsClipper extends CustomClipper<Path> {
