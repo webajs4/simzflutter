@@ -228,7 +228,7 @@ class ProfileScreen extends StatelessWidget {
                                 Text(
                                   'Amethyst \nApprentice',
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.w600,
                                     color: Color.fromRGBO(27, 60, 95, 1),
                                   ),
@@ -265,16 +265,22 @@ class ProfileScreen extends StatelessWidget {
                               children: [
                                 Image(
                                   image:
-                                      AssetImage('lib/assets/images/award.png'),
+                                      AssetImage('lib/assets/images/document-download.png'),
                                   width: 100.0,
                                   height: 100.0,
                                 ),
-                                Text(
-                                  'Amethyst \nApprentice',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color.fromRGBO(27, 60, 95, 1),
+                                SizedBox(
+                                  width: 100.0,
+                                  child: Text(
+                                    'Trinity Certificate Keyboard',
+                                    textAlign: TextAlign.center,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 4,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color.fromRGBO(27, 60, 95, 1),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -288,16 +294,22 @@ class ProfileScreen extends StatelessWidget {
                               children: [
                                 Image(
                                   image:
-                                      AssetImage('lib/assets/images/award.png'),
+                                      AssetImage('lib/assets/images/document-download.png'),
                                   width: 100.0,
                                   height: 100.0,
                                 ),
-                                Text(
-                                  'Amethyst \nApprentice',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color.fromRGBO(27, 60, 95, 1),
+                                SizedBox(
+                                  width: 100.0,
+                                  child: Text(
+                                    'Simz Excellence Certificate',
+                                    textAlign: TextAlign.center,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 4,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color.fromRGBO(27, 60, 95, 1),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -311,16 +323,22 @@ class ProfileScreen extends StatelessWidget {
                               children: [
                                 Image(
                                   image:
-                                      AssetImage('lib/assets/images/award.png'),
+                                      AssetImage('lib/assets/images/document-download.png'),
                                   width: 100.0,
                                   height: 100.0,
                                 ),
-                                Text(
-                                  'Amethyst \nApprentice',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color.fromRGBO(27, 60, 95, 1),
+                                SizedBox(
+                                  width: 100.0,
+                                  child: Text(
+                                    'Guitar Tuna Competition blah blah blah',
+                                    textAlign: TextAlign.center,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 4,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color.fromRGBO(27, 60, 95, 1),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -346,17 +364,66 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 32.0),
                 Container(
+                  width: double.infinity,
+                  height: 115,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.0),
-                    color: Colors.red[200]
+                    boxShadow: [
+                        BoxShadow(
+                          blurStyle: BlurStyle.inner,
+                          color: Color.fromARGB(30, 0, 0, 6),
+                          spreadRadius: 0.75,
+                          blurRadius: 10,
+                          offset: Offset(0, 4),
+                        ),
+                      ],
+                    color: Color(0xFFF6EBFC)
                   ),
-                  child: HomeUiHelper().customText(
-                      "        Stay connected with us !",
-                      14,
-                      FontWeight.w600,
-                      Color.fromRGBO(56, 15, 67, 1)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      HomeUiHelper().customText(
+                          "Stay connected with us !",
+                          24,
+                          FontWeight.w600,
+                          Color(0xFF380F43)),
+                      SizedBox(height: 16.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          InkWell(
+                            child: Image(
+                              image: AssetImage('lib/assets/images/facebook.png'),
+                              width: 50.0,
+                              height: 50.0,
+                            ),
+                          ),
+                          InkWell(
+                            child: Image(
+                              image: AssetImage('lib/assets/images/discord.png'),
+                              width: 50.0,
+                              height: 50.0,
+                            ),
+                          ),
+                          InkWell(
+                            child: Image(
+                              image: AssetImage('lib/assets/images/instagram.png'),
+                              width: 50.0,
+                              height: 50.0,
+                            ),
+                          ),
+                          InkWell(
+                            child: Image(
+                              image: AssetImage('lib/assets/images/whatsapp.png'),
+                              width: 50.0,
+                              height: 50.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-
+                SizedBox(height: 100.0),
               ],
             ),
           ),
