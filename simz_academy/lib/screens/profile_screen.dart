@@ -5,6 +5,7 @@ import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/constants/supabase_functions.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:simz_academy/screens/login_screen.dart';
+import 'package:simz_academy/widgets/common_widgets.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -538,7 +539,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         FontWeight.w400,
                         Color(0xFF380F43)),
                   ],
-                )
+                ),
+                FooterWidget(),
               ],
             ),
           ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:simz_academy/UIHelper/music_library_helper.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
-import 'package:simz_academy/screens/video_player.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -138,9 +138,11 @@ class MusicLibraryScreenState extends State<MusicLibraryScreen> {
                         //print(videoId);
                         return InkWell(
                           onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                              return VideoPlayer(videoUrl: videoId, title: musicData[index]['music_title']);
-                            }));
+
+                            showAlert(context,videoId);
+                            // Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                            //   return VideoPlayer(videoUrl: videoId, title: musicData[index]['music_title']);
+                            // }));
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(top: 8.0,bottom: 8.0),
