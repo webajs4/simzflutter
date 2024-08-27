@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:simz_academy/functions/show_alert.dart';
 import 'package:simz_academy/providers/quiz_provider.dart';
-import 'package:simz_academy/screens/quizizz_page.dart';
+//import 'package:simz_academy/screens/quizizz_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// A ConsumerWidget that displays a list of quizzes.
 ///
@@ -42,30 +44,33 @@ class QuizConsumers extends ConsumerWidget {
               itemBuilder: (context, index) {
                 final s = quiz[index];
                 return Padding(
-                  padding: const EdgeInsets.only(top:10,bottom:10,left: 15,right: 15),
+                  padding: const EdgeInsets.only(
+                      top: 10, bottom: 10, left: 15, right: 15),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Color.fromRGBO(246, 235, 252, 1),
-                      borderRadius: BorderRadius.circular(16)
-                    ),
+                        color: Color.fromRGBO(246, 235, 252, 1),
+                        borderRadius: BorderRadius.circular(16)),
                     child: ListTile(
                       leading: Image.asset(
                           'lib/assets/images/keys_illustration.png'),
                       title: HomeUiHelper().customText('${s['quiz_name']}', 24,
                           FontWeight.w700, Color.fromRGBO(27, 71, 113, 1)),
                       trailing: TextButton(
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all(
-                            Color.fromRGBO(223, 183, 240, 1)
-                          ),
-                          shape: WidgetStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)
-                            )
-                          )
-                        ),
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => QuizizzPage(index: index)));
+                          style: ButtonStyle(
+                              backgroundColor: WidgetStateProperty.all(
+                                  Color.fromRGBO(223, 183, 240, 1)),
+                              shape: WidgetStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10)))),
+                          onPressed: () async {
+                            final response = await Supabase.instance.client
+                                .from('quiz')
+                                .select('quiz_url')
+                                .eq('id', index + 1)
+                                .single();
+                            String data = response['quiz_url'].toString();
+                            showAlertBox(context, data);
                           },
                           child: HomeUiHelper().customText('Join', 16,
                               FontWeight.w600, Color.fromRGBO(56, 15, 67, 1))),

@@ -75,17 +75,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Color.fromRGBO(251, 246, 253, 1)),
                         ),
                         onPressed: () {
+                          // Logout user and goto Login and to remove all the previous pages
                           Supabase.instance.client.auth.signOut();
-                          Navigator.of(context)
-                              .pushReplacement(MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
-                          ));
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
+                            (Route<dynamic> route) =>
+                                false, 
+                          );
                         },
                         child: HomeUiHelper().customText(
                           "Logout",
                           20,
                           FontWeight.w400,
-                          Color.fromRGBO(255,255,255, 1),
+                          Color.fromRGBO(255, 255, 255, 1),
                         ),
                       ),
                     ],
@@ -468,8 +471,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           InkWell(
                             onTap: () => _launchURL(
-                                Uri.parse('https://simzmuzic.com/'),
-                                false),
+                                Uri.parse('https://simzmuzic.com/'), false),
                             child: Image(
                               image:
                                   AssetImage('lib/assets/images/discord.png'),
