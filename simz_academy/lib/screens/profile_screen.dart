@@ -467,6 +467,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                           InkWell(
+                            onTap: () => _launchURL(
+                                Uri.parse('https://simzmuzic.com/'),
+                                false),
                             child: Image(
                               image:
                                   AssetImage('lib/assets/images/discord.png'),
