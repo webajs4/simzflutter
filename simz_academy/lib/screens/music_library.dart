@@ -21,6 +21,7 @@ class MusicLibraryScreenState extends State<MusicLibraryScreen> {
         .stream(primaryKey: ['id']);
     return Scaffold(
       appBar: AppBar(
+        
         leading: IconButton(
           icon: const Icon(Iconsax.arrow_square_left,
               color: Color.fromRGBO(56, 15, 67, 1)),
@@ -34,6 +35,14 @@ class MusicLibraryScreenState extends State<MusicLibraryScreen> {
         title: Center(
             child: HomeUiHelper().customText('Recorded Classes', 24,
                 FontWeight.w400, Color.fromRGBO(56, 15, 67, 1))),
+        actions:const  [
+          SizedBox(
+            width: 60,
+            height: 40,
+          )
+        ],
+        //backgroundColor: Color.fromRGBO(246, 235, 252, 1),
+        elevation: 0.0,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -137,15 +146,15 @@ class MusicLibraryScreenState extends State<MusicLibraryScreen> {
                             musicData[index]['music_url']);
                         //print(videoId);
                         return InkWell(
-                          onTap: (){
-
-                            showAlert(context,videoId);
+                          onTap: () {
+                            showAlert(context, videoId);
                             // Navigator.of(context).push(MaterialPageRoute(builder: (context){
                             //   return VideoPlayer(videoUrl: videoId, title: musicData[index]['music_title']);
                             // }));
                           },
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 8.0,bottom: 8.0),
+                            padding:
+                                const EdgeInsets.only(top: 8.0, bottom: 8.0),
                             child: Stack(
                               children: [
                                 ClipRRect(
@@ -157,7 +166,8 @@ class MusicLibraryScreenState extends State<MusicLibraryScreen> {
                                         //color: Color.fromRGBO(246, 235, 252, 1),
                                         ),
                                     child: Image.network(
-                                      YoutubePlayer.getThumbnail(videoId: videoId!),
+                                      YoutubePlayer.getThumbnail(
+                                          videoId: videoId!),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -215,7 +225,8 @@ class MusicLibraryScreenState extends State<MusicLibraryScreen> {
                                                 MainAxisAlignment.spaceAround,
                                             children: <Widget>[
                                               HomeUiHelper().customText(
-                                                musicData[index]['music_instructor'],
+                                                musicData[index]
+                                                    ['music_instructor'],
                                                 18,
                                                 FontWeight.w700,
                                                 Color(0xFFFBF6FD),
@@ -224,7 +235,8 @@ class MusicLibraryScreenState extends State<MusicLibraryScreen> {
                                                 children: <Widget>[
                                                   HomeUiHelper().customText(
                                                     musicData[index]
-                                                        ['music_lessons'].toString(),
+                                                            ['music_lessons']
+                                                        .toString(),
                                                     14,
                                                     FontWeight.w600,
                                                     Color(0xFFFBF6FD),

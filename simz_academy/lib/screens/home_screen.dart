@@ -9,8 +9,6 @@ import 'package:simz_academy/screens/sheet_screen.dart';
 import 'package:simz_academy/screens/syllabus_screen.dart';
 import 'package:simz_academy/widgets/home_screen_widgets.dart';
 
-
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -91,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(right:12.0),
+                            padding: const EdgeInsets.only(right: 4.0),
                             child: Image.asset(
                               'lib/assets/images/person.png',
                               fit: BoxFit.cover,
@@ -216,8 +214,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ),
                                     ),
-                                    onPressed: () async{
-
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            title: Text(
+                                              "This feature is in development",
+                                              maxLines: 3,
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text(
+                                                  'Close',
+                                                  style: TextStyle(
+                                                    color: Color.fromRGBO(
+                                                        56,
+                                                        15,
+                                                        67,
+                                                        1), // Set the text color
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
                                     },
                                     child: const Text(
                                       'Track Lessons',
@@ -263,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SomethingToDo().buildIconButtonWithText(
                         context,
                         IconsaxPlusBold.clipboard_text,
-                        'Exam',
+                        'Quiz',
                         const QuizScreen(),
                         const Color.fromRGBO(126, 30, 37, 1),
                         const Color.fromRGBO(254, 202, 206, 1)),

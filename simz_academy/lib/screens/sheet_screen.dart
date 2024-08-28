@@ -23,6 +23,12 @@ class SheetScreen extends StatelessWidget {
           child: HomeUiHelper().customText(
               'Sheets', 24, FontWeight.w400, Color.fromRGBO(56, 15, 67, 1)),
         ),
+        actions: const [
+          SizedBox(
+            width: 60,
+            height: 40,
+          ),
+        ],
       ),
       body: const Center(child: SheetConsumer()),
     );
