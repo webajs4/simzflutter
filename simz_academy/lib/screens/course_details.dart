@@ -1,22 +1,22 @@
 // ignore_for_file: non_constant_identifier_names
 
 //import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/consumers/course_detail_consumer.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CourseDetails extends StatefulWidget {
   final String course_id;
   final String course_instructor;
   final String course_title;
+  final int lesson_count;
   const CourseDetails({
     super.key,
     required this.course_id,
     required this.course_instructor,
     required this.course_title,
+    required this.lesson_count,
   });
 
   @override
@@ -26,9 +26,9 @@ class CourseDetails extends StatefulWidget {
 class _CourseDetailsState extends State<CourseDetails> {
   @override
   Widget build(BuildContext context) {
+    //var lessonCount = getDetails();
     //getDetails();
-    List courseDetailList = [];
-
+    //List courseDetailList = [];
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -149,16 +149,36 @@ class _CourseDetailsState extends State<CourseDetails> {
                         ],
                       ),
                       Row(
-                        children: <Widget>[
-                          Icon(
-                            Iconsax.note,
-                            color: Color.fromRGBO(255, 255, 255, 1),
-                          ),
-                          Text(
-                            " ${getDetails(courseDetailList)} Lessons",
-                            style: TextStyle(
+                        children: [
+                          Row(
+                            children: <Widget>[
+                              Icon(
+                                Iconsax.note,
                                 color: Color.fromRGBO(255, 255, 255, 1),
-                                fontSize: 16),
+                              ),
+                              Text(
+                                " ${widget.lesson_count.toString()} lessons",
+                                style: TextStyle(
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: const <Widget>[
+                              Icon(
+                                Iconsax.star,
+                                color: Color.fromRGBO(255, 255, 255, 1),
+                              ),
+                              Text(
+                                " 4.5",
+                                style: TextStyle(
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -189,21 +209,18 @@ class _CourseDetailsState extends State<CourseDetails> {
     );
   }
 
-  Future<int> getDetails(List courseDetailList) async {
-    // Get course details
-    final response = await Supabase.instance.client
-        .from('course_details')
-        .select('*')
-        .eq('course_id', widget.course_id);
-
-    for (var detail in response) {
-      //print("${detail['id']} ${detail['lessons']}");
-
-      // Assuming response is a map, add the whole map to the list
-      courseDetailList.add(detail);
-    }
-    return courseDetailList.length;
-  }
+  // getDetails() async {
+  //   // Get course details
+  //   final response = await Supabase.instance.client
+  //       .from('all_courses')
+  //       .select('no_of_lessons')
+  //       .eq('course_id', widget.course_id)
+  //       .single();
+  //   var data = response;
+  //   debugPrint('total lessons : ${data['no_of_lessons']}');
+  //
+  //   return data['no_of_lessons'] ?? 0;
+  // }
 }
 
 class CourseDetailsClipper extends CustomClipper<Path> {

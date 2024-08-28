@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart'; // Ensure you have the iconsax package added in pubspec.yaml
+//import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/constants/supabase_functions.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
@@ -200,7 +201,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: 4.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    //SizedBox(width: 16.0),
+                    TextButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text(
+                                "Will be available soon",
+                                maxLines: 3,
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    'Close',
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(
+                                          56, 15, 67, 1), // Set the text color
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          HomeUiHelper().customText(
+                            'Edit Profile  ',
+                            16,
+                            FontWeight.w400,
+                            Color.fromRGBO(56, 15, 67, 1),
+                          ),
+                          Icon(
+                            Iconsax.edit,
+                            color: Color.fromRGBO(56, 15, 67, 1),
+                            size: 16,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8.0),
                 HomeUiHelper().customText("Your Courses", 20, FontWeight.w600,
                     Color.fromRGBO(56, 15, 67, 1)),
                 SizedBox(height: 16.0),
@@ -438,7 +490,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Container(
                   width: double.infinity,
                   height: 115,
-                  decoration: BoxDecoration(color: Colors.transparent,),
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [

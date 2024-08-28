@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
+//import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:simz_academy/UIHelper/course_ui_helper.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
@@ -32,47 +32,48 @@ class _MyCoursesState extends State<CourseScreen> {
             }));
           },
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Stack(
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: const Color.fromRGBO(236, 215, 247, 1),
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: const Icon(
-                        IconsaxPlusLinear.notification,
-                        color: Color.fromRGBO(56, 15, 67, 1.0),
-                      ),
-                    ),
-                    Positioned(
-                      top: 2,
-                      right: 2,
-                      child: Container(
-                        width: 13,
-                        height: 13,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+        actions: const [
+          // Padding(
+          //   padding: const EdgeInsets.all(12.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.end,
+          //     children: <Widget>[
+          //       Stack(
+          //         children: [
+          //           Container(
+          //             width: 40,
+          //             height: 40,
+          //             decoration: BoxDecoration(
+          //               color: const Color.fromRGBO(236, 215, 247, 1),
+          //               borderRadius: BorderRadius.circular(25),
+          //             ),
+          //             child: const Icon(
+          //               IconsaxPlusLinear.notification,
+          //               color: Color.fromRGBO(56, 15, 67, 1.0),
+          //             ),
+          //           ),
+          //           Positioned(
+          //             top: 2,
+          //             right: 2,
+          //             child: Container(
+          //               width: 13,
+          //               height: 13,
+          //               decoration: BoxDecoration(
+          //                 color: Colors.red,
+          //                 borderRadius: BorderRadius.circular(25),
+          //               ),
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          SizedBox(width: 60,height: 40,),
         ],
         title: Center(
           child: CourseUiHelper().customText(
-              'Courses', 24, FontWeight.w600, Color.fromRGBO(56, 15, 67, 1)),
+              'Courses', 24, FontWeight.w400, Color.fromRGBO(56, 15, 67, 1)),
         ),
       ),
       body: SingleChildScrollView(
@@ -121,6 +122,7 @@ class _MyCoursesState extends State<CourseScreen> {
                       fees: courses[index]['course_price'].toDouble(),
                       course_id: courses[index]['course_id'].toString(),
                       course_instructor: courses[index]['course_instructor'].toString(),
+                      lesson_count: courses[index]['no_of_lessons'] != null ? courses[index]['no_of_lessons'].toInt() : 0,
                     );
                   },
                 );

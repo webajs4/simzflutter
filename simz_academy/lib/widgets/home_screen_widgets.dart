@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:simz_academy/functions/show_alert.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 //Something To Do
@@ -136,7 +137,14 @@ class _LiveNowState extends State<LiveNow> {
                                 const Color.fromRGBO(105, 42, 123, 1),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () async {
+                              final response = await Supabase.instance.client
+                                  .from('live')
+                                  .select('meet_url')
+                                  .single();
+                              var data = response['meet_url'];
+                              showAlertBox(context, data);
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
@@ -225,88 +233,107 @@ class _UpcomingState extends State<Upcoming> {
         //   'Date: $upcomingDate'
         // );
         return Center(
-          child: Container(
-            width: 350,
-            height: 350,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-            ),
-            child: Stack(
-              children: <Widget>[
-                Image.asset('lib/assets/images/keyboard playing music.png'),
-                Positioned(
-                  left: 30,
-                  top: 30,
-                  child: Container(
-                    width: 60,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        color: const Color.fromRGBO(251, 246, 253, 1),
-                        borderRadius: BorderRadius.circular(16)),
-                    child: Center(
-                        child: HomeUiHelper().customText(
-                            'Online',
-                            14,
-                            FontWeight.w600,
-                            const Color.fromRGBO(126, 30, 37, 1))),
-                  ),
-                ),
-                Positioned(
-                  top: 150,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        HomeUiHelper().customText(
-                          upcomingClass,
-                          28,
-                          FontWeight.w600,
-                          const Color.fromRGBO(251, 246, 253, 1),
-                        ),
-                        HomeUiHelper().customText(
-                          upcomingMentor,
-                          18,
-                          FontWeight.w400,
-                          const Color.fromRGBO(251, 246, 253, 1),
-                        ),
-                        Row(
-                          children: [
-                            const Icon(
-                              Iconsax.calendar,
-                              color: Color.fromRGBO(251, 246, 253, 1),
-                              size: 16,
-                            ),
-                            const SizedBox(width: 5),
-                            HomeUiHelper().customText(
-                              upcomingDate,
-                              16,
-                              FontWeight.w400,
-                              const Color.fromRGBO(251, 246, 253, 1),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Icon(
-                              Iconsax.clock,
-                              color: Color.fromRGBO(251, 246, 253, 1),
-                              size: 16,
-                            ),
-                            const SizedBox(width: 5),
-                            HomeUiHelper().customText(
-                              upcomingTime,
-                              16,
-                              FontWeight.w400,
-                              const Color.fromRGBO(251, 246, 253, 1),
-                            ),
-                          ],
-                        ),
-                      ],
+          child: InkWell(
+            onTap: ()async{
+              print(upcomingEvents); 
+              String dateTimeString = '$upcomingDate $upcomingTime';
+              try {
+                //parse to datetime
+
+                DateTime classTime = DateTime.parse(dateTimeString);
+                print('Parsed DateTime: $classTime');
+
+                //convert to milliseconds
+                int timeInMillis = classTime.millisecondsSinceEpoch;
+                final  androidUrl = "content://com.android.calendar/time/$timeInMillis";
+                showAlertBox(context, androidUrl);
+              }catch(e){
+                print(e.toString());
+              }
+            },
+            child: Container(
+              width: 350,
+              height: 350,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Stack(
+                children: <Widget>[
+                  Image.asset('lib/assets/images/keyboard playing music.png'),
+                  Positioned(
+                    left: 30,
+                    top: 30,
+                    child: Container(
+                      width: 60,
+                      height: 30,
+                      decoration: BoxDecoration(
+                          color: const Color.fromRGBO(251, 246, 253, 1),
+                          borderRadius: BorderRadius.circular(16)),
+                      child: Center(
+                          child: HomeUiHelper().customText(
+                              'Online',
+                              14,
+                              FontWeight.w600,
+                              const Color.fromRGBO(126, 30, 37, 1))),
                     ),
                   ),
-                ),
-              ],
+                  Positioned(
+                    top: 150,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          HomeUiHelper().customText(
+                            upcomingClass,
+                            28,
+                            FontWeight.w600,
+                            const Color.fromRGBO(251, 246, 253, 1),
+                          ),
+                          HomeUiHelper().customText(
+                            upcomingMentor,
+                            18,
+                            FontWeight.w400,
+                            const Color.fromRGBO(251, 246, 253, 1),
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Iconsax.calendar,
+                                color: Color.fromRGBO(251, 246, 253, 1),
+                                size: 16,
+                              ),
+                              const SizedBox(width: 5),
+                              HomeUiHelper().customText(
+                                upcomingDate,
+                                16,
+                                FontWeight.w400,
+                                const Color.fromRGBO(251, 246, 253, 1),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Iconsax.clock,
+                                color: Color.fromRGBO(251, 246, 253, 1),
+                                size: 16,
+                              ),
+                              const SizedBox(width: 5),
+                              HomeUiHelper().customText(
+                                upcomingTime,
+                                16,
+                                FontWeight.w400,
+                                const Color.fromRGBO(251, 246, 253, 1),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );

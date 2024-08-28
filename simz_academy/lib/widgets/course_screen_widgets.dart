@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:simz_academy/UIHelper/course_ui_helper.dart';
+import 'package:simz_academy/functions/show_alert.dart';
 import 'package:simz_academy/screens/course_details.dart';
 
 class CourseCard extends StatelessWidget {
@@ -14,6 +15,7 @@ class CourseCard extends StatelessWidget {
   final String course_id;
    // ignore: non_constant_identifier_names
   final String course_instructor;
+  final int lesson_count;
 
   const CourseCard({
     super.key,
@@ -25,7 +27,7 @@ class CourseCard extends StatelessWidget {
      // ignore: non_constant_identifier_names
     required this.course_id,
      // ignore: non_constant_identifier_names
-    required this.course_instructor,
+    required this.course_instructor, required this.lesson_count,
   });
 
   @override
@@ -114,6 +116,7 @@ class CourseCard extends StatelessWidget {
                                     course_id: course_id,
                                     course_instructor: course_instructor,
                                     course_title: courseName,
+                                    lesson_count: lesson_count,
                                   ),
                                 ),
                               );
@@ -150,7 +153,7 @@ class CourseCard extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {
-                              
+                              showAlertBox(context, 'tel:+919072397378');
                             },
                             icon: const Icon(
                               size: 18,
