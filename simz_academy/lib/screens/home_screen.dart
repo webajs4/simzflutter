@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(right:12.0),
+                            padding: const EdgeInsets.only(right:4.0),
                             child: Image.asset(
                               'lib/assets/images/person.png',
                               fit: BoxFit.cover,
@@ -263,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SomethingToDo().buildIconButtonWithText(
                         context,
                         IconsaxPlusBold.clipboard_text,
-                        'Exam',
+                        'Quiz',
                         const QuizScreen(),
                         const Color.fromRGBO(126, 30, 37, 1),
                         const Color.fromRGBO(254, 202, 206, 1)),

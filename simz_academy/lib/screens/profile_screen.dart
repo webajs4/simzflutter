@@ -80,8 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (context) => LoginScreen()),
-                            (Route<dynamic> route) =>
-                                false, 
+                            (Route<dynamic> route) => false,
                           );
                         },
                         child: HomeUiHelper().customText(
@@ -439,15 +438,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Container(
                   width: double.infinity,
                   height: 115,
-                  decoration: BoxDecoration(boxShadow: const [
-                    BoxShadow(
-                      blurStyle: BlurStyle.inner,
-                      color: Color.fromARGB(30, 0, 0, 6),
-                      spreadRadius: 0.75,
-                      blurRadius: 10,
-                      offset: Offset(0, 4),
-                    ),
-                  ], color: Color(0xFFF6EBFC)),
+                  decoration: BoxDecoration(color: Colors.transparent,),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [

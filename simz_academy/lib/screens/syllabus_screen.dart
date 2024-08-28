@@ -44,11 +44,10 @@ class SyllabusScreen extends StatelessWidget {
             color: Color.fromRGBO(56, 15, 67, 1),
           ),
         ),
-        actions: [
+        actions: const [
           SizedBox(
-            width: 40,
+            width: 60,
             height: 40,
-            child: Image.asset('lib/assets/images/person.png'),
           ),
         ],
       ),

@@ -16,7 +16,13 @@ class PractiseScreen extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Center(child: HomeUiHelper().customText('Practice', 24, FontWeight.w400, Color.fromRGBO(56, 15, 67, 1)))
+        title: Center(child: HomeUiHelper().customText('Practice', 24, FontWeight.w400, Color.fromRGBO(56, 15, 67, 1))),
+        actions: const [
+          SizedBox(
+            width: 60,
+            height: 40,
+          ),
+        ],
       ),
       body: const Center(
         child: Center(
