@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:simz_academy/UIHelper/course_ui_helper.dart';
+import 'package:simz_academy/functions/show_alert.dart';
 import 'package:simz_academy/screens/course_details.dart';
 
 class CourseCard extends StatelessWidget {
@@ -150,7 +151,7 @@ class CourseCard extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {
-                              
+                              showAlertBox(context, 'tel:+919072397378');
                             },
                             icon: const Icon(
                               size: 18,

@@ -52,7 +52,33 @@ class SheetConsumer extends ConsumerWidget {
                               backgroundColor: WidgetStateProperty.all(
                                 Color(0xFFFBA6AC),
                               )),
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text(
+                                    "This feature is in development",
+                                    maxLines: 3,
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        'Close',
+                                        style: TextStyle(
+                                          color: Color.fromRGBO(56, 15, 67,
+                                              1), // Set the text color
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                           child: HomeUiHelper().customText('Download', 16,
                               FontWeight.w600, Color.fromRGBO(69, 10, 14, 1))),
                       leading: Image.asset('lib/assets/images/sheets.png'),

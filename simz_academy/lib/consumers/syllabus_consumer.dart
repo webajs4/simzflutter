@@ -57,14 +57,24 @@ class SyllabusConsumer extends ConsumerWidget {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text("This feature is in development",
-                                    maxLines: 3),
-                                icon: TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text('Close'),
+                                title: Text(
+                                  "This feature is in development",
+                                  maxLines: 3,
                                 ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      'Close',
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(56, 15, 67,
+                                            1), // Set the text color
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               );
                             },
                           );
