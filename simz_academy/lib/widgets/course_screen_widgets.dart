@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
@@ -11,12 +13,12 @@ class CourseCard extends StatelessWidget {
   final String subtitle;
   final double review;
   final double fees;
-  // ignore: non_constant_identifier_names
+
   final String course_id;
-   // ignore: non_constant_identifier_names
+
   final String course_instructor;
   final int lesson_count;
-
+  final String course_duration;
   const CourseCard({
     super.key,
     required this.imageUrl,
@@ -24,10 +26,10 @@ class CourseCard extends StatelessWidget {
     required this.subtitle,
     required this.review,
     required this.fees,
-     // ignore: non_constant_identifier_names
     required this.course_id,
-     // ignore: non_constant_identifier_names
-    required this.course_instructor, required this.lesson_count,
+    required this.course_instructor,
+    required this.lesson_count,
+    required this.course_duration,
   });
 
   @override
@@ -97,8 +99,8 @@ class CourseCard extends StatelessWidget {
                                   WidgetStateProperty.all<EdgeInsetsGeometry>(
                                 const EdgeInsets.all(8),
                               ),
-                              shape:
-                                  WidgetStateProperty.all<RoundedRectangleBorder>(
+                              shape: WidgetStateProperty.all<
+                                  RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
@@ -117,6 +119,7 @@ class CourseCard extends StatelessWidget {
                                     course_instructor: course_instructor,
                                     course_title: courseName,
                                     lesson_count: lesson_count,
+                                    course_duration: course_duration,
                                   ),
                                 ),
                               );
