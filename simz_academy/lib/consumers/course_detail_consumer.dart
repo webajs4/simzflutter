@@ -21,24 +21,31 @@ class CourseDetailConsumer extends ConsumerWidget {
             itemCount: courseDetail.length,
             itemBuilder: (context, index) {
               final cd = courseDetail[index];
-              return ListTile(
-                leading: HomeUiHelper().customText(
-                  getIndex(index),
-                  24,
-                  FontWeight.w600,
-                  Color(0xFF380F43),
-                ),
-                title: HomeUiHelper().customText(
-                  '${cd['lessons']}',
-                  24,
-                  FontWeight.w400,
-                  Color(0xFF380F43),
-                ),
-                trailing: HomeUiHelper().customText(
-                  '${cd['lesson_duration']}',
-                  18,
-                  FontWeight.w400,
-                  Color(0xFF380F43),
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  tileColor: Color(0xFFF6EBFC),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  leading: HomeUiHelper().customText(
+                    getIndex(index),
+                    24,
+                    FontWeight.w600,
+                    Color(0xFF380F43),
+                  ),
+                  title: HomeUiHelper().customText(
+                    '${cd['lessons']}',
+                    24,
+                    FontWeight.w400,
+                    Color(0xFF380F43),
+                  ),
+                  trailing: HomeUiHelper().customText(
+                    '${cd['lesson_duration']} mins',
+                    18,
+                    FontWeight.w400,
+                    Color(0xFF380F43),
+                  ),
                 ),
               );
             },

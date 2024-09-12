@@ -6,19 +6,22 @@ import 'package:iconsax/iconsax.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/consumers/course_detail_consumer.dart';
 
+import '../widgets/course_screen_widgets.dart';
+
 class CourseDetails extends StatefulWidget {
   final String course_id;
   final String course_instructor;
   final String course_title;
   final int lesson_count;
   final String course_duration;
+  final String coursePrice;
   const CourseDetails({
     super.key,
     required this.course_id,
     required this.course_instructor,
     required this.course_title,
     required this.lesson_count,
-    required this.course_duration,
+    required this.course_duration, required this.coursePrice,
   });
 
   @override
@@ -106,7 +109,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                               child: CircleAvatar(
                                 radius: 15,
                                 backgroundImage:
-                                    AssetImage('lib/assets/images/person.png'),
+                                AssetImage('lib/assets/images/person.png'),
                                 backgroundColor: Colors.transparent,
                                 foregroundColor: Colors.white,
                                 child: Image.asset(
@@ -139,16 +142,22 @@ class _CourseDetailsState extends State<CourseDetails> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          HomeUiHelper().customText(
-                              widget.course_title,
-                              32,
-                              FontWeight.w600,
-                              Color.fromRGBO(251, 246, 253, 1)),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * .7,
+                            child: HomeUiHelper().customText(
+                                widget.course_title,
+                                32,
+                                FontWeight.w600,
+                                Color.fromRGBO(251, 246, 253, 1)),
+                          ),
                           const SizedBox(
                             width: 10,
                           ),
                           Image.asset('lib/assets/images/sheets.png'),
                         ],
+                      ),
+                      SizedBox.fromSize(
+                        size: const Size(0, 10),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -200,24 +209,44 @@ class _CourseDetailsState extends State<CourseDetails> {
                 child: Center(child: CourseDetailConsumer()),
               ),
             ),
+            CourseDescription(
+              courseId: widget.course_id,
+            ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child : Container(
+          height: 80,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  HomeUiHelper().customText('Total Price', 15, FontWeight.w300, Color(0xFF380F43),),
+                  HomeUiHelper().customText('₹${widget.coursePrice}', 20, FontWeight.w600, Color(0xFF380F43),),
+                ],
+              ),
+              BuyNow()
+            ],
+          ),
+        )
       ),
     );
   }
 
-  // getDetails() async {
-  //   // Get course details
-  //   final response = await Supabase.instance.client
-  //       .from('all_courses')
-  //       .select('no_of_lessons')
-  //       .eq('course_id', widget.course_id)
-  //       .single();
-  //   var data = response;
-  //   debugPrint('total lessons : ${data['no_of_lessons']}');
-  //
-  //   return data['no_of_lessons'] ?? 0;
-  // }
+// getDetails() async {
+//   // Get course details
+//   final response = await Supabase.instance.client
+//       .from('all_courses')
+//       .select('no_of_lessons')
+//       .eq('course_id', widget.course_id)
+//       .single();
+//   var data = response;
+//   debugPrint('total lessons : ${data['no_of_lessons']}');
+//
+//   return data['no_of_lessons'] ?? 0;
+// }
 }
 
 class CourseDetailsClipper extends CustomClipper<Path> {

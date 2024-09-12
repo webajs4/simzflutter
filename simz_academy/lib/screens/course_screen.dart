@@ -19,7 +19,7 @@ class CourseScreen extends StatefulWidget {
 
 class _MyCoursesState extends State<CourseScreen> {
   final allCourses =
-      Supabase.instance.client.from('all_courses').stream(primaryKey: ['id']);
+  Supabase.instance.client.from('all_courses').stream(primaryKey: ['id']);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,12 +128,11 @@ class _MyCoursesState extends State<CourseScreen> {
                       fees: courses[index]['course_price'].toDouble(),
                       course_id: courses[index]['course_id'].toString(),
                       course_instructor:
-                          courses[index]['course_instructor'].toString(),
+                      courses[index]['course_instructor'].toString(),
                       lesson_count: courses[index]['no_of_lessons'] != null
                           ? courses[index]['no_of_lessons'].toInt()
                           : 0,
-                      course_duration:
-                          courses[index]['course_duration'].toString(),
+                      course_duration: courses[index]['course_duration'].toString(),
                     );
                   },
                 );
