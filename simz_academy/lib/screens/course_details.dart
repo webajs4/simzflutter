@@ -11,12 +11,14 @@ class CourseDetails extends StatefulWidget {
   final String course_instructor;
   final String course_title;
   final int lesson_count;
+  final String course_duration;
   const CourseDetails({
     super.key,
     required this.course_id,
     required this.course_instructor,
     required this.course_title,
     required this.lesson_count,
+    required this.course_duration,
   });
 
   @override
@@ -149,6 +151,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Row(
                             children: <Widget>[
@@ -165,14 +168,17 @@ class _CourseDetailsState extends State<CourseDetails> {
                               ),
                             ],
                           ),
+                          const SizedBox(
+                            width: 60,
+                          ),
                           Row(
-                            children: const <Widget>[
+                            children: <Widget>[
                               Icon(
-                                Iconsax.star,
+                                Iconsax.timer_start,
                                 color: Color.fromRGBO(255, 255, 255, 1),
                               ),
                               Text(
-                                " 4.5",
+                                "${widget.course_duration} mins",
                                 style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   fontSize: 16,
@@ -189,18 +195,9 @@ class _CourseDetailsState extends State<CourseDetails> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  HomeUiHelper().customText(
-                      'Lessons', 20, FontWeight.w600, Color(0xFF380F43)),
-                  const SizedBox(height: 10),
-                  ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxHeight: MediaQuery.of(context).size.height * 1.2,
-                    ),
-                    child: CourseDetailConsumer(),
-                  ),
-                ],
+              child: SizedBox(
+                height: (MediaQuery.of(context).size.height) * .7,
+                child: Center(child: CourseDetailConsumer()),
               ),
             ),
           ],
