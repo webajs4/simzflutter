@@ -27,7 +27,8 @@ class _MyCoursesState extends State<CourseScreen> {
         leading: IconButton(
           icon: const Icon(Iconsax.arrow_square_left),
           onPressed: () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context){
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (context) {
               return const BottomNav();
             }));
           },
@@ -69,7 +70,10 @@ class _MyCoursesState extends State<CourseScreen> {
           //     ],
           //   ),
           // ),
-          SizedBox(width: 60,height: 40,),
+          SizedBox(
+            width: 60,
+            height: 40,
+          ),
         ],
         title: Center(
           child: CourseUiHelper().customText(
@@ -117,12 +121,19 @@ class _MyCoursesState extends State<CourseScreen> {
                     return CourseCard(
                       imageUrl: imagepath,
                       title: courses[index]['course_name'].toString(),
-                      subtitle: 'Course Description', 
-                      review: courses[index]['course_review'] != null ? courses[index]['course_review'].toDouble() : 0.0,
+                      subtitle: 'Course Description',
+                      review: courses[index]['course_review'] != null
+                          ? courses[index]['course_review'].toDouble()
+                          : 0.0,
                       fees: courses[index]['course_price'].toDouble(),
                       course_id: courses[index]['course_id'].toString(),
-                      course_instructor: courses[index]['course_instructor'].toString(),
-                      lesson_count: courses[index]['no_of_lessons'] != null ? courses[index]['no_of_lessons'].toInt() : 0,
+                      course_instructor:
+                          courses[index]['course_instructor'].toString(),
+                      lesson_count: courses[index]['no_of_lessons'] != null
+                          ? courses[index]['no_of_lessons'].toInt()
+                          : 0,
+                      course_duration:
+                          courses[index]['course_duration'].toString(),
                     );
                   },
                 );
