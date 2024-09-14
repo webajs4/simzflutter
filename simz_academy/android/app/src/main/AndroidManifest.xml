@@ -2,7 +2,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <application
-        android:label="simz_academy"
+        android:label="Simz Academy"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

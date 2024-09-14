@@ -1,9 +1,14 @@
+// ignore_for_file: non_constant_identifier_names, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:simz_academy/UIHelper/course_ui_helper.dart';
 import 'package:simz_academy/functions/show_alert.dart';
 import 'package:simz_academy/screens/course_details.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../UIHelper/home_ui_helper.dart';
 
 class CourseCard extends StatelessWidget {
   final String imageUrl;
@@ -11,11 +16,12 @@ class CourseCard extends StatelessWidget {
   final String subtitle;
   final double review;
   final double fees;
-  // ignore: non_constant_identifier_names
-  final String course_id;
-   // ignore: non_constant_identifier_names
-  final String course_instructor;
 
+  final String course_id;
+
+  final String course_instructor;
+  final int lesson_count;
+  final String course_duration;
   const CourseCard({
     super.key,
     required this.imageUrl,
@@ -23,10 +29,10 @@ class CourseCard extends StatelessWidget {
     required this.subtitle,
     required this.review,
     required this.fees,
-     // ignore: non_constant_identifier_names
     required this.course_id,
-     // ignore: non_constant_identifier_names
     required this.course_instructor,
+    required this.lesson_count,
+    required this.course_duration,
   });
 
   @override
@@ -93,11 +99,11 @@ class CourseCard extends StatelessWidget {
                           child: ElevatedButton(
                             style: ButtonStyle(
                               padding:
-                                  WidgetStateProperty.all<EdgeInsetsGeometry>(
+                              WidgetStateProperty.all<EdgeInsetsGeometry>(
                                 const EdgeInsets.all(8),
                               ),
-                              shape:
-                                  WidgetStateProperty.all<RoundedRectangleBorder>(
+                              shape: WidgetStateProperty.all<
+                                  RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
@@ -115,6 +121,9 @@ class CourseCard extends StatelessWidget {
                                     course_id: course_id,
                                     course_instructor: course_instructor,
                                     course_title: courseName,
+                                    lesson_count: lesson_count,
+                                    course_duration: course_duration,
+                                    coursePrice: fees.toString(),
                                   ),
                                 ),
                               );
@@ -166,6 +175,116 @@ class CourseCard extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CourseDescription extends StatefulWidget {
+  final String courseId;
+  const CourseDescription({super.key, required this.courseId});
+
+  @override
+  State<CourseDescription> createState() => _CourseDescriptionState();
+}
+
+class _CourseDescriptionState extends State<CourseDescription> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          HomeUiHelper().customText('Description', 20, FontWeight.w600, Color(0xFF380F43),),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FutureBuilder<String>(
+              future: getDescription(), // Fetch description asynchronously
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // Show loading indicator while waiting
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  // Handle error case
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (snapshot.hasData) {
+                  // Render the description when data is available
+                  return SizedBox(
+                    child: HomeUiHelper().customText(
+                      snapshot.data!, // Safely access the description
+                      16,
+                      FontWeight.w400,
+                      const Color(0xFF380F43),
+                    ),
+                  );
+                } else {
+                  // Handle case where there's no data
+                  return const Center(child: Text('No description available.'));
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<String> getDescription() async {
+    final response = await Supabase.instance.client
+        .from('all_courses')
+        .select('course_description')
+        .eq('course_id', widget.courseId)
+        .single(); // Ensures a single row is returned
+
+    final description = response['course_description'] as String;
+
+    //print(description);
+
+    return description;
+  }
+}
+
+
+class BuyNow extends StatelessWidget {
+  const BuyNow({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 120,
+      height: 40,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
+            const EdgeInsets.all(8),
+          ),
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          backgroundColor: WidgetStateProperty.all<Color>(
+            const Color.fromRGBO(129, 50, 153, 1),
+          ),
+        ),
+        onPressed: () {
+          // Handle button press
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center, // Centering content in the button
+          children: [
+            CourseUiHelper().customText(
+              'Buy Now ',
+              16,
+              FontWeight.normal,
+              const Color.fromRGBO(251, 246, 253, 1),
+            ),
+            const Icon(
+              IconsaxPlusLinear.shop,
+              size: 20,
+              color: Color.fromRGBO(251, 246, 253, 1),
             ),
           ],
         ),
