@@ -216,7 +216,8 @@ class _CourseDetailsState extends State<CourseDetails> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        child : Container(
+        child : SizedBox(
+          width: MediaQuery.of(context).size.width,
           height: 80,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

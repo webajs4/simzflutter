@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:simz_academy/UIHelper/home_ui_helper.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
 //import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:simz_academy/screens/login_screen.dart';
@@ -40,10 +41,37 @@ class SplashScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      body: Center(
-        child: Image.asset(
-          'lib/assets/images/splash_screen.png',
-          fit: BoxFit.fill,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: const [
+              Color.fromRGBO(254, 202, 206, 1), // rgba(254, 202, 206, 1)
+              Colors.white, // white in the center
+              Color.fromRGBO(196, 220, 243, 1), // rgba(196, 220, 243, 1)
+            ],
+            stops: const [0.0, 0.5, 1.0], // Control color spread
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                "lib/assets/images/simz_logo.png",
+                fit: BoxFit.fill,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:  [
+                  HomeUiHelper().customText('Simz ', 32, FontWeight.w600, Color(0xFF380F43),),
+                  HomeUiHelper().customText('Academy', 32, FontWeight.w600, Color(0xFF1B3C5F),),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
