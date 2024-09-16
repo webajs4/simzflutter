@@ -1,11 +1,15 @@
 // ignore_for_file: non_constant_identifier_names, duplicate_ignore
 
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:simz_academy/UIHelper/course_ui_helper.dart';
 import 'package:simz_academy/functions/show_alert.dart';
 import 'package:simz_academy/screens/course_details.dart';
+import 'package:simz_academy/screens/qr_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../UIHelper/home_ui_helper.dart';
@@ -99,7 +103,7 @@ class CourseCard extends StatelessWidget {
                           child: ElevatedButton(
                             style: ButtonStyle(
                               padding:
-                              WidgetStateProperty.all<EdgeInsetsGeometry>(
+                                  WidgetStateProperty.all<EdgeInsetsGeometry>(
                                 const EdgeInsets.all(8),
                               ),
                               shape: WidgetStateProperty.all<
@@ -160,7 +164,21 @@ class CourseCard extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {
-                              showAlertBox(context, 'tel:+919072397378');
+                              if (kIsWeb ||
+                                  kIsWasm ||
+                                  Platform.isLinux ||
+                                  Platform.isWindows ||
+                                  Platform.isMacOS) {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return QrScreen();
+                                    },
+                                  ),
+                                );
+                              } else {
+                                showAlertBox(context, 'tel:+919072397378');
+                              }
                             },
                             icon: const Icon(
                               size: 18,
@@ -197,7 +215,12 @@ class _CourseDescriptionState extends State<CourseDescription> {
     return Center(
       child: Column(
         children: [
-          HomeUiHelper().customText('Description', 20, FontWeight.w600, Color(0xFF380F43),),
+          HomeUiHelper().customText(
+            'Description',
+            20,
+            FontWeight.w600,
+            Color(0xFF380F43),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: FutureBuilder<String>(
@@ -246,7 +269,6 @@ class _CourseDescriptionState extends State<CourseDescription> {
   }
 }
 
-
 class BuyNow extends StatelessWidget {
   const BuyNow({super.key});
 
@@ -273,7 +295,8 @@ class BuyNow extends StatelessWidget {
           // Handle button press
         },
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center, // Centering content in the button
+          mainAxisAlignment:
+              MainAxisAlignment.center, // Centering content in the button
           children: [
             CourseUiHelper().customText(
               'Buy Now ',
