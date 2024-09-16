@@ -6,7 +6,8 @@ import 'package:simz_academy/constants/supabase_functions.dart';
 import 'package:simz_academy/screens/quiz_screen.dart';
 import 'package:simz_academy/screens/practise_screen.dart';
 import 'package:simz_academy/screens/sheet_screen.dart';
-import 'package:simz_academy/screens/syllabus_screen.dart';
+//import 'package:simz_academy/screens/syllabus_screen.dart';
+import 'package:simz_academy/screens/syllabus_select_screen.dart';
 import 'package:simz_academy/widgets/home_screen_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -282,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         // make the icons bold
                         IconsaxPlusBold.book,
                         'Syllabus',
-                        const SyllabusScreen(),
+                        const SyllabusSelectScreen(),
                         const Color.fromRGBO(91, 40, 103, 1),
                         const Color.fromRGBO(236, 215, 247, 1)),
                     const SomethingToDo().buildIconButtonWithText(
