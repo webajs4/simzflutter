@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:simz_academy/UIHelper/home_ui_helper.dart';
+import 'package:simz_academy/constants/screen_details.dart';
 //import 'package:simz_academy/constants/supabase_functions.dart';
 import 'package:simz_academy/screens/bottom_nav.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -45,7 +46,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 height: 30,
               ),
               Align(
-                alignment: Alignment.topLeft,
+                alignment: ScreenDetails().getScreenWidth(context) > 800 ? Alignment.center : Alignment.topLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: HomeUiHelper().customText('Enter the Code ', 24,
@@ -132,7 +133,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       ));
                     }}
                     catch(e){
-                      print(e);
+                      debugPrint(e.toString());
                     }
                   },
                   child: (submitted)?CircularProgressIndicator():HomeUiHelper().customText(
