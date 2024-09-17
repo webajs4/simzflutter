@@ -47,6 +47,6 @@ void _launchURL(Uri uri, bool inApp) async {
         }
       }
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
   }
