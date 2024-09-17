@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       home: SplashScreen(),
       debugShowCheckedModeBanner: false,
+      title : 'Simz Academy',
     );
   }
 }
