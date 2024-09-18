@@ -13,6 +13,7 @@ import 'package:simz_academy/screens/qr_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../UIHelper/home_ui_helper.dart';
+import '../screens/payment_conformation_screen.dart';
 
 class CourseCard extends StatelessWidget {
   final String imageUrl;
@@ -270,7 +271,9 @@ class _CourseDescriptionState extends State<CourseDescription> {
 }
 
 class BuyNow extends StatelessWidget {
-  const BuyNow({super.key});
+  final String courseName;
+  final String coursePrice;
+  const BuyNow({super.key, required this.courseName, required this.coursePrice});
 
   @override
   Widget build(BuildContext context) {
@@ -292,7 +295,12 @@ class BuyNow extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          // Handle button press
+          Navigator.of(context).push(MaterialPageRoute(builder: (context){
+            return PaymentConformationScreen(
+              courseName: courseName.toString(),
+              coursePrice: coursePrice.toString(),
+            );
+          }));
         },
         child: Row(
           mainAxisAlignment:

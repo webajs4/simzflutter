@@ -135,6 +135,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                   top: 125,
                   left: 15,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(
                         height: 30,
@@ -228,7 +229,10 @@ class _CourseDetailsState extends State<CourseDetails> {
                   HomeUiHelper().customText('₹${widget.coursePrice}', 20, FontWeight.w600, Color(0xFF380F43),),
                 ],
               ),
-              BuyNow()
+              BuyNow(
+                courseName: widget.course_title.toString(),
+                coursePrice: widget.coursePrice.toString(),
+              )
             ],
           ),
         )
