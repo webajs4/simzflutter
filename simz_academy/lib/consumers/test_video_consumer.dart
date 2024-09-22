@@ -9,9 +9,7 @@ class TestVideoConsumer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final testVideoAsyncValue = ref.watch(testVideoProvider);
-
     return Scaffold(
-
       body: Center(
         child: testVideoAsyncValue.when(
           data: (testVideo) {
@@ -27,6 +25,7 @@ class TestVideoConsumer extends ConsumerWidget {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context){
                       return VideoPlayerScreen(
                         videoUrl: v['video_url'],
+                        videoDesc: v['video_description'],
                       );
                     }));
                   },
