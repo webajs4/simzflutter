@@ -8,6 +8,7 @@ import 'package:simz_academy/screens/practise_screen.dart';
 import 'package:simz_academy/screens/sheet_screen.dart';
 //import 'package:simz_academy/screens/syllabus_screen.dart';
 import 'package:simz_academy/screens/syllabus_select_screen.dart';
+import 'package:simz_academy/screens/test_search_screen.dart';
 import 'package:simz_academy/screens/test_video_player.dart';
 import 'package:simz_academy/widgets/home_screen_widgets.dart';
 
@@ -176,7 +177,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     const Color.fromRGBO(28, 83, 136, 1),
                                   ),
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of (context).push(MaterialPageRoute(builder: (context){
+                                        return TestSearchScreen();
+                                      },),);
+                                    },
                                     icon: const Icon(
                                       Iconsax.music_playlist,
                                       color: Color.fromRGBO(28, 83, 136, 1),

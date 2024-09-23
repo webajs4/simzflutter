@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   final String videoDesc;
@@ -65,6 +66,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         },
       );
     });
+
+    WakelockPlus.enable(); // Keep the screen on while the video is playing
   }
 
   @override
@@ -88,6 +91,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   void dispose() {
     _videoPlayerController.dispose(); // Dispose the controller to free up resources
     chewieController?.dispose();
+    WakelockPlus.disable(); // Disable the wakelock when the video is done
     super.dispose();
   }
 }
